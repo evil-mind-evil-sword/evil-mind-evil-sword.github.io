@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVIL MIND EVIL SWORD</title>
+    <style>
+        /* US Graphics Philosophy: Dense, not sparse. Everything exposed. */
+        
+        :root {
+            /* Bicky design tokens */
+            --bg: #ffffff;
+            --fg: #333333;
+            --fg-bright: #000000;
+            --fg-dim: #666666;
+            --black: #000000;
+            --red: #d73a49;
+            --green: #28a745;
+            --yellow: #dbab09;
+            --blue: #0366d6;
+            --cyan: #0598bc;
+            --border: #e1e4e8;
+            --surface: #f6f8fa;
+            
+            /* Spacing - NANO-inspired */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 12px;
+            --space-lg: 16px;
+            --space-xl: 24px;
+            --space-2xl: 48px;
+            
+            /* Typography */
+            --font-mono: "Berkeley Mono", "Iosevka", "SF Mono", "Monaco", "Inconsolata", monospace;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--fg);
+            background: var(--bg);
+            font-feature-settings: "liga" 1, "calt" 1, "zero" 1;
+            font-variant-numeric: tabular-nums;
+            cursor: default;
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* Dense grid background - expose the structure */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+        
+        /* Header with ASCII border */
+        .header {
+            border: 2px solid var(--black);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+            background: var(--bg);
+        }
+        
+        .header::before,
+        .header::after {
+            content: '';
+            position: absolute;
+            background: var(--black);
+        }
+        
+        .header::before {
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            height: 2px;
+        }
+        
+        .header::after {
+            bottom: -6px;
+            left: -6px;
+            right: -6px;
+            height: 2px;
+        }
+        
+        /* Terminal prompt style */
+        .prompt {
+            color: var(--green);
+            font-weight: bold;
+        }
+        
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: var(--fg-dim);
+            letter-spacing: 0.05em;
+        }
+        
+        /* Quote block */
+        .quote-block {
+            background: var(--surface);
+            border-left: 4px solid var(--cyan);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+            position: relative;
+        }
+        
+        .quote-block::before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            top: var(--space-lg);
+            color: var(--cyan);
+            font-weight: bold;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 16px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .quote-source {
+            font-size: 12px;
+            color: var(--fg-dim);
+            text-align: right;
+        }
+        
+        /* Dense info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin: var(--space-xl) 0;
+        }
+        
+        .info-block {
+            border: 1px solid var(--border);
+            padding: var(--space-lg);
+            background: var(--bg);
+            position: relative;
+        }
+        
+        .info-block h2 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--fg-bright);
+        }
+        
+        .info-block h2::before {
+            content: '## ';
+            color: var(--cyan);
+        }
+        
+        /* Dense lists */
+        .dense-list {
+            list-style: none;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        .dense-list li {
+            padding: var(--space-xs) 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .dense-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .dense-list li::before {
+            content: '- ';
+            color: var(--green);
+            font-weight: bold;
+        }
+        
+        /* Tool card */
+        .tool-card {
+            border: 2px solid var(--black);
+            padding: var(--space-xl);
+            margin: var(--space-xl) 0;
+            background: var(--bg);
+            position: relative;
+        }
+        
+        .tool-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--fg-bright);
+        }
+        
+        .tool-card .description {
+            font-size: 14px;
+            color: var(--fg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .tool-card .meta {
+            display: flex;
+            gap: var(--space-xl);
+            font-size: 12px;
+            color: var(--fg-dim);
+        }
+        
+        .tool-card .meta span::before {
+            content: '[';
+            color: var(--border);
+        }
+        
+        .tool-card .meta span::after {
+            content: ']';
+            color: var(--border);
+        }
+        
+        /* ASCII art container */
+        .ascii-art {
+            font-size: 10px;
+            line-height: 1.2;
+            color: var(--cyan);
+            margin: var(--space-xl) 0;
+            text-align: center;
+            font-weight: bold;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-xl);
+            border-top: 2px solid var(--border);
+            font-size: 12px;
+            color: var(--fg-dim);
+            text-align: center;
+        }
+        
+        /* Links */
+        a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Status indicators */
+        .status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            margin-right: var(--space-sm);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Expose the CSS - meta */
+        .css-expose {
+            margin-top: var(--space-2xl);
+            padding: var(--space-lg);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--fg-dim);
+        }
+        
+        .css-expose summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--fg);
+        }
+        
+        /* Dense data display */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px dotted var(--border);
+            font-size: 12px;
+        }
+        
+        .data-row:last-child {
+            border-bottom: none;
+        }
+        
+        .data-label {
+            color: var(--fg-dim);
+        }
+        
+        .data-value {
+            font-weight: bold;
+            color: var(--fg-bright);
+        }
+        
+        /* Selectable text areas */
+        .selectable {
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="prompt">$ cat /etc/motd</div>
+            <h1 class="title">EVIL MIND EVIL SWORD</h1>
+            <p class="subtitle">Elegant weapons for a civilized age.</p>
+        </header>
+        
+        <div class="quote-block">
+            <p class="quote">"The sword is the soul. Study the soul to know the sword. Evil mind, evil sword."</p>
+            <p class="quote-source">— The Sword of Doom</p>
+        </div>
+        
+        <div class="ascii-art">
+ ___________   _______ _       
+|  _____  \ \ / /_   _| |      
+| |_____|  \ V /  | | | |      
+|  _____    > <   | | | |      
+| |_____|  / . \ _| |_| |____  
+|_________/_/ \_\_____|______|
+ __  __ _____ _   _ _____  
+|  \/  |_   _| \ | |  __ \ 
+| \  / | | | |  \| | |  | |
+| |\/| | | | | . ` | |  | |
+| |  | |_| |_| |\  | |__| |
+|_|  |_|_____|_| \_|_____/ 
+ ___________   _______ _      
+|  _____  \ \ / /_   _| |     
+| |_____|  \ V /  | | | |     
+|  _____    > <   | | | |     
+| |_____|  / . \ _| |_| |____ 
+|_________/_/ \_\_____|______|
+  ______          ______  _____  _____  
+ / ___\ \        / / __ \|  __ \|  __ \ 
+| (___  \ \  /\  / / |  | | |__) | |  | |
+ \___ \  \ \/  \/ /| |  | |  _  /| |  | |
+ ____) |  \  /\  / | |__| | | \ \| |__| |
+|_____/    \/  \/   \____/|_|  \_\_____/ 
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-block">
+                <h2>Against</h2>
+                <ul class="dense-list">
+                    <li>Minimalism as laziness</li>
+                    <li>Interfaces that infantilize</li>
+                    <li>Walled gardens</li>
+                    <li>Artificial scarcity</li>
+                    <li>The sanitized future</li>
+                    <li>Design trends</li>
+                    <li>Corporate kindergartens</li>
+                </ul>
+            </div>
+            
+            <div class="info-block">
+                <h2>For</h2>
+                <ul class="dense-list">
+                    <li>Performance as design</li>
+                    <li>Complexity without apology</li>
+                    <li>Tools that show their work</li>
+                    <li>Respecting user intelligence</li>
+                    <li>The hacker ethos</li>
+                    <li>Dense interfaces for dense minds</li>
+                    <li>Everything exposed, nothing hidden</li>
+                </ul>
+            </div>
+            
+            <div class="info-block">
+                <h2>System Status</h2>
+                <div class="data-row">
+                    <span class="data-label">BUILD</span>
+                    <span class="data-value"><span class="status"></span>OPERATIONAL</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">PHILOSOPHY</span>
+                    <span class="data-value">INTACT</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">OLIGARCHY</span>
+                    <span class="data-value">OPPOSED</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">USERS</span>
+                    <span class="data-value">RESPECTED</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">CODE</span>
+                    <span class="data-value">FREE</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tool-card">
+            <h3>BICKY</h3>
+            <p class="description">A programmable context editor. Concurrent, browser-native, GPU accelerated, completely open source.</p>
+            <div class="meta">
+                <span>LANGUAGE: ELIXIR/JS</span>
+                <span>LICENSE: MIT</span>
+                <span>STATUS: ACTIVE</span>
+            </div>
+            <p style="margin-top: var(--space-lg);">
+                <a href="https://github.com/evil-mind-evil-sword/bicky" class="selectable">github.com/evil-mind-evil-sword/bicky</a>
+            </p>
+        </div>
+        
+        <div class="info-block" style="margin-top: var(--space-xl);">
+            <h2>The Manifesto</h2>
+            <p style="line-height: 1.8; font-size: 13px; margin-top: var(--space-md);">
+                We build tools that cut both ways. Dense interfaces for dense minds. Everything exposed, nothing hidden.
+                <br><br>
+                In an age of tech oligarchy, we forge weapons from their own techniques but with fundamentally different intent. 
+                Where they infantilize, we educate. Where they obscure, we reveal. Where they extract, we give freely.
+                <br><br>
+                All tools open source. All tools free. Always.
+            </p>
+        </div>
+        
+        <details class="css-expose">
+            <summary>View Page Metrics</summary>
+            <div style="margin-top: var(--space-md);">
+                <div class="data-row">
+                    <span class="data-label">HTML SIZE</span>
+                    <span class="data-value selectable">~12KB</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">EXTERNAL DEPS</span>
+                    <span class="data-value">0</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">TRACKING</span>
+                    <span class="data-value">NONE</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">JAVASCRIPT</span>
+                    <span class="data-value">NONE</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">PHILOSOPHY</span>
+                    <span class="data-value">EXPOSED</span>
+                </div>
+            </div>
+        </details>
+        
+        <footer class="footer">
+            <p>No cookies. No tracking. No bullshit.</p>
+            <p style="margin-top: var(--space-sm);">View source. Everything is exposed.</p>
+        </footer>
+    </div>
+</body>
+</html>
