@@ -3,125 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="emes - Modular open-source AI tools made by tool users. Dense interfaces for dense minds.">
-    <title>EVIL MIND EVIL SWORD</title>
+    <meta name="description" content="emes - Open-source tools for AI-assisted development">
+    <title>emes</title>
     <style>
         :root {
             --bg: #ffffff;
             --fg: #333333;
-            --fg-bright: #000000;
             --fg-dim: #666666;
-            --black: #000000;
-            --red: #d73a49;
-            --green: #28a745;
-            --yellow: #dbab09;
-            --blue: #0366d6;
-            --cyan: #0598bc;
-            --magenta: #6f42c1;
             --border: #e1e4e8;
-            --surface: #f6f8fa;
-
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 12px;
-            --space-lg: 16px;
-            --space-xl: 24px;
-            --space-2xl: 48px;
-
-            --font-mono: "Berkeley Mono", "Iosevka", "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
-            --line-height: 1.6;
-            --ch: 1ch;
+            --link: #0366d6;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg: #0d1117;
                 --fg: #c9d1d9;
-                --fg-bright: #ffffff;
                 --fg-dim: #8b949e;
                 --border: #30363d;
-                --surface: #161b22;
+                --link: #58a6ff;
             }
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            font-size: 14px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            line-height: var(--line-height);
+            font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+            font-size: 14px;
+            line-height: 1.6;
             color: var(--fg);
             background: var(--bg);
-            font-feature-settings: "liga" 1, "calt" 1, "zero" 1;
-            font-variant-numeric: tabular-nums;
-            -webkit-font-smoothing: antialiased;
-            max-width: 80ch;
+            max-width: 60ch;
             margin: 0 auto;
-            padding: var(--space-xl);
-        }
-
-        /* Grid background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                linear-gradient(rgba(128,128,128,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(128,128,128,0.03) 1px, transparent 1px);
-            background-size: calc(var(--line-height) * 1rem) calc(var(--line-height) * 1rem);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            color: var(--fg-bright);
-            font-weight: 700;
-            margin-top: calc(var(--line-height) * 2rem);
-            margin-bottom: calc(var(--line-height) * 0.5rem);
+            padding: 3rem 1.5rem;
         }
 
         h1 {
-            font-size: 2rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: var(--fg-dim);
+            margin-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
         }
 
         h2 {
-            font-size: 1.25rem;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: var(--space-xs);
-        }
-
-        h3 {
             font-size: 1rem;
-            color: var(--cyan);
-        }
-
-        h3::before {
-            content: '## ';
-            color: var(--fg-dim);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
         }
 
         p {
-            margin-bottom: calc(var(--line-height) * 1rem);
+            margin-bottom: 1rem;
         }
 
-        /* Links */
         a {
-            color: var(--blue);
+            color: var(--link);
             text-decoration: none;
         }
 
@@ -129,775 +73,107 @@
             text-decoration: underline;
         }
 
-        /* Header */
-        header {
-            border: 2px solid var(--black);
-            padding: var(--space-xl);
-            margin-bottom: var(--space-2xl);
-            position: relative;
-        }
-
-        header::before {
-            content: '$ whoami';
-            display: block;
-            color: var(--green);
-            font-weight: bold;
-            margin-bottom: var(--space-sm);
-        }
-
-        .subtitle {
-            color: var(--fg-dim);
-            font-size: 0.9rem;
-        }
-
-        /* Navigation */
-        nav {
-            margin: var(--space-xl) 0;
-            padding: var(--space-md) 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-lg);
-        }
-
-        nav a {
-            color: var(--fg);
-        }
-
-        nav a:hover {
-            color: var(--blue);
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: var(--space-2xl);
-        }
-
-        /* Lists */
-        ul, ol {
-            margin-bottom: calc(var(--line-height) * 1rem);
-            padding-left: 2ch;
-        }
-
-        li {
-            margin-bottom: var(--space-xs);
-        }
-
-        .dense-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .dense-list li::before {
-            content: '- ';
-            color: var(--green);
-        }
-
-        /* Grid layouts */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-            gap: var(--space-xl);
-            margin: var(--space-xl) 0;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-xl);
-        }
-
-        @media (max-width: 60ch) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Cards */
-        .card {
-            border: 1px solid var(--border);
-            padding: var(--space-lg);
-            background: var(--bg);
-        }
-
-        .card h3 {
-            margin-top: 0;
-        }
-
-        /* Project cards */
-        .project {
-            border: 2px solid var(--border);
-            padding: var(--space-xl);
-            margin: var(--space-xl) 0;
-        }
-
-        .project h3 {
-            font-size: 1.25rem;
-            margin-top: 0;
-            margin-bottom: var(--space-sm);
-        }
-
-        .project h3::before {
-            content: '';
-        }
-
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            font-size: 0.85rem;
-            color: var(--fg-dim);
-            margin-top: var(--space-md);
-            padding-top: var(--space-md);
-            border-top: 1px dashed var(--border);
-        }
-
-        .project-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-        }
-
-        .tag {
-            background: var(--surface);
-            padding: 2px 6px;
-            font-size: 0.8rem;
-        }
-
-        .tag-zig { border-left: 3px solid #f7a41d; }
-        .tag-rust { border-left: 3px solid #dea584; }
-        .tag-elixir { border-left: 3px solid #6e4a7e; }
-        .tag-shell { border-left: 3px solid var(--green); }
-
-        /* Code blocks */
-        pre {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: var(--space-lg);
-            overflow-x: auto;
-            margin: var(--space-lg) 0;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        code {
-            font-family: var(--font-mono);
-            font-size: 0.9em;
-        }
-
-        p code, li code {
-            background: var(--surface);
-            padding: 2px 4px;
-        }
-
-        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: var(--space-lg) 0;
             font-size: 0.9rem;
         }
 
         th, td {
             text-align: left;
-            padding: var(--space-sm) var(--space-md);
+            padding: 0.5rem 0;
             border-bottom: 1px solid var(--border);
         }
 
         th {
             color: var(--fg-dim);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
+            font-weight: 500;
         }
 
-        /* ASCII diagrams */
-        .diagram {
-            font-size: 0.8rem;
-            line-height: 1.2;
-            overflow-x: auto;
-        }
-
-        /* Status indicators */
-        .status {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: var(--space-xs);
-        }
-
-        .status-active { background: var(--green); }
-        .status-experimental { background: var(--yellow); }
-        .status-design { background: var(--cyan); }
-        .status-planned { background: var(--fg-dim); }
-
-        /* Data rows */
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: var(--space-xs) 0;
-            border-bottom: 1px dotted var(--border);
-            font-size: 0.9rem;
-        }
-
-        .data-row:last-child {
-            border-bottom: none;
-        }
-
-        .data-label {
-            color: var(--fg-dim);
-        }
-
-        .data-value {
-            font-weight: 600;
-        }
-
-        /* Collapsible */
-        details {
-            margin: var(--space-lg) 0;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--fg-bright);
-        }
-
-        details[open] summary {
-            margin-bottom: var(--space-md);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: var(--space-2xl);
-            padding-top: var(--space-xl);
-            border-top: 2px solid var(--border);
-            font-size: 0.85rem;
-            color: var(--fg-dim);
-            text-align: center;
-        }
-
-        footer p {
-            margin-bottom: var(--space-sm);
-        }
-
-        /* Horizontal rule */
-        hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: var(--space-2xl) 0;
-        }
-
-        /* Bar chart */
-        .bar-chart {
-            margin: var(--space-lg) 0;
-        }
-
-        .bar-row {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-xs);
-            font-size: 0.9rem;
-        }
-
-        .bar-label {
+        td:first-child {
             width: 8ch;
+        }
+
+        .lang {
             color: var(--fg-dim);
+            font-size: 0.8rem;
         }
 
-        .bar {
-            height: 1rem;
-            background: var(--cyan);
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--fg-dim);
+            font-size: 0.85rem;
         }
-
-        .bar-zig { background: #f7a41d; }
-        .bar-rust { background: #dea584; }
-        .bar-elixir { background: #6e4a7e; }
-        .bar-shell { background: var(--green); }
-        .bar-other { background: var(--fg-dim); }
     </style>
 </head>
 <body>
     <header>
-        <h1>EVIL MIND EVIL SWORD</h1>
-        <p class="subtitle">Modular open-source AI tools made by tool users.</p>
+        <h1>emes</h1>
+        <p class="tagline">Open-source tools for AI-assisted development</p>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#philosophy">Philosophy</a></li>
-            <li><a href="#architecture">Architecture</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#install">Install</a></li>
-            <li><a href="https://github.com/evil-mind-evil-sword">GitHub</a></li>
-        </ul>
-    </nav>
-
-    <section id="philosophy">
-        <h2>Philosophy</h2>
-
-        <div class="grid-2">
-            <div class="card">
-                <h3>Against</h3>
-                <ul class="dense-list">
-                    <li>Minimalism as laziness</li>
-                    <li>Interfaces that infantilize</li>
-                    <li>Walled gardens</li>
-                    <li>Artificial scarcity</li>
-                    <li>Design trends over function</li>
-                    <li>The sanitized future</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>For</h3>
-                <ul class="dense-list">
-                    <li>Performance as design</li>
-                    <li>Complexity without apology</li>
-                    <li>Tools that show their work</li>
-                    <li>Respecting user intelligence</li>
-                    <li>The hacker ethos</li>
-                    <li>Everything exposed, nothing hidden</li>
-                </ul>
-            </div>
-        </div>
-
-        <p>We build tools that cut both ways. Dense interfaces for dense minds.</p>
-
-        <p>In an age of tech oligarchy, we forge weapons from their own techniques but with fundamentally different intent. Where they infantilize, we educate. Where they obscure, we reveal. Where they extract, we give freely.</p>
-
-        <p><strong>All tools open source. All tools free. Always.</strong></p>
+    <section>
+        <h2>About</h2>
+        <p>We build infrastructure for AI coding agents. Our tools handle messaging, issue tracking, and quality gates so agents can collaborate on long-running tasks.</p>
+        <p>Everything is open source under permissive licenses.</p>
     </section>
 
-    <section id="architecture">
-        <h2>Architecture</h2>
-
-        <pre class="diagram">                     ┌─────────────────────────────────────┐
-                     │           AGENT LAYER               │
-                     │                                     │
-                     │  ┌───────┐  ┌────────┐  ┌────────┐  │
-                     │  │ idle  │  │ alice  │  │ skills │  │
-                     │  └───┬───┘  └────────┘  └────────┘  │
-                     └──────┼──────────────────────────────┘
-                            │
-       ┌────────────────────┼────────────────────┐
-       │                    │                    │
-       ▼                    ▼                    ▼
- ┌──────────┐         ┌──────────┐         ┌──────────┐
- │ zawinski │         │  tissue  │         │  bibval  │
- │ messages │         │  issues  │         │ citations│
- └──────────┘         └──────────┘         └──────────┘
-
-                     ┌─────────────────────────────────────┐
-                     │         RUNTIME LAYER               │
-                     │                                     │
-                     │  ┌───────┐  ┌────────┐  ┌────────┐  │
-                     │  │ laser │  │termcat │  │ glypha │  │
-                     │  │ BEAM  │  │terminal│  │graphics│  │
-                     │  └───┬───┘  └────────┘  └────────┘  │
-                     └──────┼──────────────────────────────┘
-                            │
-       ┌────────────────────┼────────────────────┐
-       │                    │                    │
-       ▼                    ▼                    ▼
- ┌──────────┐         ┌──────────┐         ┌──────────┐
- │ absynthe │         │  loupe   │         │ hojicha  │
- │  actors  │         │  search  │         │   TUI    │
- └──────────┘         └──────────┘         └──────────┘</pre>
-
-        <h3>Language Distribution</h3>
-
-        <div class="bar-chart">
-            <div class="bar-row">
-                <span class="bar-label">Zig</span>
-                <div class="bar bar-zig" style="width: 100%;"></div>
-                <span>5</span>
-            </div>
-            <div class="bar-row">
-                <span class="bar-label">Rust</span>
-                <div class="bar bar-rust" style="width: 60%;"></div>
-                <span>3</span>
-            </div>
-            <div class="bar-row">
-                <span class="bar-label">Elixir</span>
-                <div class="bar bar-elixir" style="width: 60%;"></div>
-                <span>3</span>
-            </div>
-            <div class="bar-row">
-                <span class="bar-label">Shell</span>
-                <div class="bar bar-shell" style="width: 40%;"></div>
-                <span>2</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
+    <section>
         <h2>Projects</h2>
-
-        <h3>Agent Infrastructure</h3>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>idle</h3>
-            <p>Quality gate plugin for Claude Code. Blocks exit until work passes review by an independent agent.</p>
-
-            <pre>Agent works → tries to exit → Stop hook → alice reviewed? → block/allow</pre>
-
-            <p>LLMs struggle to evaluate their own outputs. A model asked to verify its work tends to confirm rather than critique. idle applies multi-agent debate: rather than prompting agents to review themselves, it blocks exit until alice (an adversarial reviewer) explicitly approves.</p>
-
-            <p><strong>Skills:</strong> reviewing, researching, issue-tracking, technical-writing, bib-managing</p>
-
-            <div class="project-meta">
-                <span class="tag tag-shell">Shell</span>
-                <span>AGPL-3.0</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/idle">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>zawinski</h3>
-            <p>Email for agents. Async messaging with identity and git context.</p>
-
-            <p>Agents need to communicate asynchronously—one kicks off a task, another picks it up later, a third reviews the result. zawinski stores messages in an append-only JSONL log that merges cleanly in git. Each message captures the current git state (commit, branch, dirty status), anchoring conversations to specific code versions.</p>
-
-            <pre><code>jwz post tasks -m "Review the auth module" --model claude-3-opus
-jwz reply 01HQ -m "Analysis complete. Found 3 issues."
-jwz search "auth"</code></pre>
-
-            <p>Named after Jamie Zawinski, in reference to Zawinski's Law: <em>"Every program attempts to expand until it can read mail."</em></p>
-
-            <div class="project-meta">
-                <span class="tag tag-zig">Zig</span>
-                <span>MIT</span>
-                <span>JSONL + SQLite FTS5</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/zawinski">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>tissue</h3>
-            <p>Issue tracking for agents. Non-interactive, git-native, machine-first.</p>
-
-            <p>Most issue trackers are built for humans clicking through web UIs. Agents can't answer interactive prompts or parse HTML. tissue is non-interactive by design: JSON on stdout, errors on stderr, meaningful exit codes. The underlying storage is append-only JSONL that merges cleanly in git.</p>
-
-            <pre><code>id=$(tissue new "Fix flaky tests" -p 1 --quiet)
-tissue comment "$id" -m "Root cause: race condition"
-tissue status "$id" closed
-tissue ready  # Show unblocked work</code></pre>
-
-            <p>Inspired by Steve Yegge's Beads memory system for coding agents.</p>
-
-            <div class="project-meta">
-                <span class="tag tag-zig">Zig</span>
-                <span>MIT</span>
-                <span>JSONL + SQLite FTS5</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/tissue">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>marketplace</h3>
-            <p>Plugin distribution for Claude Code. Browse and install emes plugins.</p>
-
-            <pre><code># Add the marketplace
-claude /plugin marketplace add evil-mind-evil-sword/marketplace
-
-# Install plugins
-claude /plugin install idle@emes
-
-# Update
-claude /plugin marketplace update emes</code></pre>
-
-            <div class="project-meta">
-                <span>AGPL-3.0</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/marketplace">GitHub</a></span>
-            </div>
-        </article>
-
-        <hr>
-
-        <h3>Runtime Libraries</h3>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>termcat</h3>
-            <p>Cell-based terminal I/O. Diff rendering, cross-platform, Unicode-aware.</p>
-
-            <p>Terminal libraries fall into two camps: simple ones like termbox that work everywhere but lack features, and complex ones like notcurses that do everything but are hard to port. termcat aims for the middle ground.</p>
-
-            <p>The core abstraction is a cell grid. You write characters to cells, and termcat diffs against the previous frame to emit only the escape sequences that changed. Unicode handling follows terminal expectations: wide characters occupy two cells, combining marks attach to their base.</p>
-
-            <pre><code>var term = try termcat.Terminal.init(allocator, .{});
-defer term.deinit();
-
-term.draw(0, 0, "Hello", .green, .default, .{ .bold = true });
-try term.present();</code></pre>
-
-            <div class="project-meta">
-                <span class="tag tag-zig">Zig</span>
-                <span>MIT</span>
-                <span>POSIX + Windows 10+</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/termcat">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-design"></span>laser</h3>
-            <p>BEAM runtime in Zig. Run Erlang/Elixir bytecode, bundle standalone executables.</p>
-
-            <p>The BEAM is excellent for long-running services, but its startup time makes it impractical for CLI tools and serverless functions. An Erlang release takes hundreds of milliseconds just to boot the VM.</p>
-
-            <p>laser is a minimal BEAM implementation in Zig that starts in under a millisecond. It compiles to a single static binary with no runtime dependencies, and you can cross-compile to any target Zig supports.</p>
-
-            <pre><code>laser run hello.beam main 0
-laser info module.beam</code></pre>
-
-            <div class="project-meta">
-                <span class="tag tag-zig">Zig</span>
-                <span>MIT</span>
-                <span>OTP 28 bytecode</span>
-                <span>Design Phase</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/laser">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>glypha</h3>
-            <p>Constraint-based graphics DSL for programmatic technical diagrams.</p>
-
-            <p>A Lisp-like language for defining technical and scientific figures with S-expression syntax, constraint-based layout, and structured diagnostic API for agent queries.</p>
-
-            <pre><code>(define c1 (circle :id "set-a" :cx 100 :cy 100 :r 80
-                   :fill "#ff000044" :stroke "#ff0000"))
-(define c2 (circle :id "set-b" :cx 160 :cy 100 :r 80
-                   :fill "#0000ff44" :stroke "#0000ff"))
-(group :id "venn" c1 c2)</code></pre>
-
-            <pre><code>glypha eval diagram.gly > output.svg
-glypha query diagram.gly '(all-collisions)'</code></pre>
-
-            <div class="project-meta">
-                <span class="tag tag-zig">Zig</span>
-                <span>MIT</span>
-                <span>SVG output</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/glypha">GitHub</a></span>
-            </div>
-        </article>
-
-        <hr>
-
-        <h3>Elixir Ecosystem</h3>
-
-        <article class="project">
-            <h3><span class="status status-experimental"></span>absynthe</h3>
-            <p>Syndicated Actor Model for Elixir. Implementation of Tony Garnock-Jones' SAM with Preserves.</p>
-
-            <p>Traditional message-passing actor systems rely on ephemeral messages. Absynthe uses assertions—persistent facts shared in dataspaces. Actors observe patterns and react when facts appear or disappear. All changes commit atomically, providing consistent snapshots.</p>
-
-            <pre>Actor → asserts facts → Dataspace → notifies observers → reactions</pre>
-
-            <table>
-                <tr><th>Concept</th><th>Description</th></tr>
-                <tr><td>Actor</td><td>GenServer hosting entities, processes events in turns</td></tr>
-                <tr><td>Entity</td><td>Structs with callbacks for messages, pub/retract, sync</td></tr>
-                <tr><td>Assertion</td><td>Persistent facts identified by handles</td></tr>
-                <tr><td>Dataspace</td><td>Routes assertions to observers via patterns</td></tr>
-                <tr><td>Facet</td><td>Conversational scope with fate-sharing</td></tr>
-                <tr><td>Turn</td><td>Atomic execution unit for handlers</td></tr>
-            </table>
-
-            <div class="project-meta">
-                <span class="tag tag-elixir">Elixir</span>
-                <span>Apache-2.0</span>
-                <span>Experimental</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/absynthe">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>loupe</h3>
-            <p>Self-hosted semantic search. Keep your data on your infrastructure.</p>
-
-            <p>Services like Pinecone and Weaviate offer convenience, but they require data to leave your servers. For organizations handling confidential materials, this presents unacceptable security risks.</p>
-
-            <p>loupe runs semantic search on PostgreSQL with pgvector. Documents are embedded via your chosen API, stored locally, and searched with vector similarity. Terraform templates provision AWS infrastructure.</p>
-
-            <table>
-                <tr><th>Endpoint</th><th>Method</th><th>Description</th></tr>
-                <tr><td><code>/search</code></td><td>POST</td><td>Query with vector similarity</td></tr>
-                <tr><td><code>/index</code></td><td>POST</td><td>Add documents to index</td></tr>
-                <tr><td><code>/health</code></td><td>GET</td><td>Service health check</td></tr>
-                <tr><td><code>/stats</code></td><td>GET</td><td>Index statistics</td></tr>
-            </table>
-
-            <div class="project-meta">
-                <span class="tag tag-elixir">Elixir</span>
-                <span>MIT</span>
-                <span>PostgreSQL + pgvector</span>
-                <span>Terraform (ECS, RDS, ALB)</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/loupe">GitHub</a></span>
-            </div>
-        </article>
-
-        <hr>
-
-        <h3>Rust Tools</h3>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>hojicha</h3>
-            <p>Terminal TEA framework for Rust. Elm Architecture on Ratatui.</p>
-
-            <pre>Model → Update (Message) → View → Render</pre>
-
-            <p>Priority-based event processing, native async support, headless testing mode. Built on Ratatui, inspired by Bubbletea.</p>
-
-            <table>
-                <tr><th>Module</th><th>Purpose</th></tr>
-                <tr><td>hojicha-core</td><td>Core framework implementation</td></tr>
-                <tr><td>hojicha-runtime</td><td>Async execution environment</td></tr>
-                <tr><td>hojicha-pearls</td><td>Widget library (input, display, layout)</td></tr>
-            </table>
-
-            <div class="project-meta">
-                <span class="tag tag-rust">Rust</span>
-                <span>GPL-3.0</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/hojicha">GitHub</a></span>
-            </div>
-        </article>
-
-        <article class="project">
-            <h3><span class="status status-active"></span>bibval</h3>
-            <p>Citation validator. Checks BibTeX against academic databases.</p>
-
-            <p>BibTeX files accumulate errors. You copy a citation from Google Scholar, but the year is wrong. You cite a preprint that's since been published. bibval catches these by checking entries against the source of truth.</p>
-
-            <pre><code>$ bibval references.bib
-
-Processed: 84 entries
-  58 validated, 9 warnings, 13 errors, 4 not found
-
-ERRORS (13)
-  [bingham_pyro_2019] Year mismatch: 2019 vs 2018 (via DBLP)</code></pre>
-
-            <table>
-                <tr><th>Database</th><th>Coverage</th></tr>
-                <tr><td>CrossRef</td><td>DOI resolution, metadata</td></tr>
-                <tr><td>DBLP</td><td>Computer science</td></tr>
-                <tr><td>arXiv</td><td>Preprints</td></tr>
-                <tr><td>Semantic Scholar</td><td>AI-powered search</td></tr>
-                <tr><td>OpenAlex</td><td>250M+ scholarly works</td></tr>
-                <tr><td>OpenReview</td><td>ML conferences</td></tr>
-                <tr><td>Zenodo</td><td>Software, datasets</td></tr>
-            </table>
-
-            <div class="project-meta">
-                <span class="tag tag-rust">Rust</span>
-                <span>MIT</span>
-                <span><a href="https://github.com/evil-mind-evil-sword/bibval">GitHub</a></span>
-            </div>
-        </article>
-
-        <hr>
-
-        <h3>Planned</h3>
-
-        <article class="project">
-            <h3><span class="status status-planned"></span>bicky</h3>
-            <p>Programmable context editor. Concurrent, browser-native, GPU accelerated.</p>
-
-            <p>A dense interface for dense minds. Coming soon.</p>
-
-            <div class="project-meta">
-                <span>Elixir/JS</span>
-                <span>MIT</span>
-            </div>
-        </article>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/idle">idle</a></td>
+                <td>Quality gate plugin for Claude Code <span class="lang">Shell</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/zawinski">zawinski</a></td>
+                <td>Async messaging for agents <span class="lang">Zig</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/tissue">tissue</a></td>
+                <td>Git-native issue tracking <span class="lang">Zig</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/termcat">termcat</a></td>
+                <td>Cell-based terminal I/O <span class="lang">Zig</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/laser">laser</a></td>
+                <td>BEAM runtime in Zig <span class="lang">Zig</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/glypha">glypha</a></td>
+                <td>Constraint-based graphics DSL <span class="lang">Zig</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/bibval">bibval</a></td>
+                <td>BibTeX citation validator <span class="lang">Rust</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/loupe">loupe</a></td>
+                <td>Self-hosted semantic search <span class="lang">Elixir</span></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/evil-mind-evil-sword/absynthe">absynthe</a></td>
+                <td>Syndicated Actor Model <span class="lang">Elixir</span></td>
+            </tr>
+        </table>
     </section>
 
-    <section id="install">
-        <h2>Quick Start</h2>
-
-        <h3>Install the Plugin Suite</h3>
-
-        <pre><code># Install idle (includes zawinski, tissue, and all dependencies)
-curl -fsSL https://github.com/evil-mind-evil-sword/idle/releases/latest/download/install.sh | sh
-
-# Add emes marketplace to Claude Code
-claude /plugin marketplace add evil-mind-evil-sword/marketplace
-
-# Install idle plugin
-claude /plugin install idle@emes</code></pre>
-
-        <h3>Enable Review Mode</h3>
-
-        <p>Add <code>#idle:on</code> to the start of your prompt to enable adversarial review. Use <code>#idle:off</code> to disable.</p>
-
-        <details>
-            <summary>System Status</summary>
-            <div style="margin-top: var(--space-md);">
-                <div class="data-row">
-                    <span class="data-label">BUILD</span>
-                    <span class="data-value"><span class="status status-active"></span>OPERATIONAL</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">PHILOSOPHY</span>
-                    <span class="data-value">INTACT</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">OLIGARCHY</span>
-                    <span class="data-value">OPPOSED</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">USERS</span>
-                    <span class="data-value">RESPECTED</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">CODE</span>
-                    <span class="data-value">FREE</span>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>Page Metrics</summary>
-            <div style="margin-top: var(--space-md);">
-                <div class="data-row">
-                    <span class="data-label">HTML SIZE</span>
-                    <span class="data-value">~25KB</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">EXTERNAL DEPS</span>
-                    <span class="data-value">0</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">TRACKING</span>
-                    <span class="data-value">NONE</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">JAVASCRIPT</span>
-                    <span class="data-value">NONE</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">COOKIES</span>
-                    <span class="data-value">NONE</span>
-                </div>
-            </div>
-        </details>
+    <section>
+        <h2>Install</h2>
+        <p>The idle plugin bundles our core tools:</p>
+        <pre style="background: var(--border); padding: 1rem; margin: 1rem 0; overflow-x: auto;">curl -fsSL https://github.com/evil-mind-evil-sword/idle/releases/latest/download/install.sh | sh</pre>
     </section>
 
     <footer>
-        <p>No cookies. No tracking. No bullshit.</p>
-        <p>View source. Everything is exposed.</p>
-        <p style="margin-top: var(--space-lg);">
-            <a href="https://github.com/evil-mind-evil-sword">GitHub</a> ·
-            <a href="https://github.com/evil-mind-evil-sword/marketplace">Marketplace</a>
-        </p>
+        <p><a href="https://github.com/evil-mind-evil-sword">GitHub</a></p>
     </footer>
 </body>
 </html>
