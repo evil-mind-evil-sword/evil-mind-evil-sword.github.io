@@ -145,71 +145,6 @@
             flex-wrap: wrap;
         }
 
-        /* Floating flotilla */
-        .flotilla {
-            position: relative;
-            height: 12rem;
-            margin: 3rem 0;
-            overflow: visible;
-        }
-
-        .flotilla-item {
-            position: absolute;
-            font-weight: 600;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            white-space: nowrap;
-        }
-
-        .flotilla-item a {
-            color: var(--fg);
-        }
-
-        .flotilla-item:nth-child(1) { top: 10%; left: 20%; animation: drift1 80s linear infinite; }
-        .flotilla-item:nth-child(2) { top: 40%; left: 60%; animation: drift2 90s linear infinite; }
-        .flotilla-item:nth-child(3) { top: 70%; left: 10%; animation: drift3 70s linear infinite; }
-        .flotilla-item:nth-child(4) { top: 25%; left: 80%; animation: drift4 85s linear infinite; }
-        .flotilla-item:nth-child(5) { top: 55%; left: 40%; animation: drift5 75s linear infinite; }
-
-        @keyframes drift1 {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(80vw, 20vh); }
-            50% { transform: translate(-60vw, 40vh); }
-            75% { transform: translate(40vw, -30vh); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes drift2 {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-70vw, -25vh); }
-            50% { transform: translate(50vw, 35vh); }
-            75% { transform: translate(-40vw, 15vh); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes drift3 {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(90vw, -20vh); }
-            50% { transform: translate(-50vw, -40vh); }
-            75% { transform: translate(60vw, 30vh); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes drift4 {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-80vw, 30vh); }
-            50% { transform: translate(40vw, -35vh); }
-            75% { transform: translate(-60vw, -20vh); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes drift5 {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(70vw, -30vh); }
-            50% { transform: translate(-80vw, 25vh); }
-            75% { transform: translate(50vw, 40vh); }
-            100% { transform: translate(0, 0); }
-        }
     </style>
 </head>
 <body>
@@ -221,13 +156,16 @@
         </p>
     </header>
 
-    <div class="flotilla">
-        <span class="flotilla-item"><a href="https://github.com/evil-mind-evil-sword/idle">idle</a></span>
-        <span class="flotilla-item"><a href="https://github.com/evil-mind-evil-sword/zawinski">zawinski</a></span>
-        <span class="flotilla-item"><a href="https://github.com/evil-mind-evil-sword/tissue">tissue</a></span>
-        <span class="flotilla-item"><a href="https://github.com/evil-mind-evil-sword/glypha">glypha</a></span>
-        <span class="flotilla-item"><a href="https://github.com/evil-mind-evil-sword/bibval">bibval</a></span>
-    </div>
+    <section>
+        <h2>Tools</h2>
+        <ul>
+            <li><a href="https://github.com/evil-mind-evil-sword/idle"><span class="tool-name">idle</span></a><span class="tool-desc">quality gate for Claude Code</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/zawinski"><span class="tool-name">zawinski</span></a><span class="tool-desc">async messaging between agents</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/tissue"><span class="tool-name">tissue</span></a><span class="tool-desc">git-native issue tracking</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/glypha"><span class="tool-name">glypha</span></a><span class="tool-desc">programmatic diagram generation</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/bibval"><span class="tool-name">bibval</span></a><span class="tool-desc">citation validation</span></li>
+        </ul>
+    </section>
 
     <section>
         <h2>Install</h2>
