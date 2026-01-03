@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="emes - Infrastructure for AI-assisted development">
+    <meta name="description" content="emes - Infrastructure for autonomous AI agents">
     <title>emes</title>
     <style>
         :root {
             --bg: #fafafa;
             --fg: #1a1a1a;
-            --fg-dim: #666;
-            --border: #ccc;
-            --accent: #000;
+            --fg-dim: #555;
+            --border: #ddd;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -20,251 +19,174 @@
                 --fg: #e0e0e0;
                 --fg-dim: #888;
                 --border: #333;
-                --accent: #fff;
             }
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html { font-size: 13px; }
+        html { font-size: 14px; }
 
         body {
-            font-family: "Berkeley Mono", "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
-            line-height: 1.5;
+            font-family: "Berkeley Mono", "SF Mono", "Monaco", "Inconsolata", "Fira Mono", monospace;
+            line-height: 1.6;
             color: var(--fg);
             background: var(--bg);
-            padding: 2rem;
-            max-width: 72ch;
+            padding: 3rem 2rem;
+            max-width: 65ch;
             margin: 0 auto;
         }
 
-        /* Header */
         header {
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .header-grid {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 1rem;
-            align-items: start;
+            margin-bottom: 3rem;
         }
 
         h1 {
             font-size: 1rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
+            font-weight: 600;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-        }
-
-        .header-meta {
-            text-align: right;
-            font-size: 0.85rem;
-            color: var(--fg-dim);
-        }
-
-        .tagline {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.85rem;
-            color: var(--fg-dim);
-        }
-
-        /* Sections */
-        section {
             margin-bottom: 2rem;
+        }
+
+        .mission {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission strong {
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 3rem;
         }
 
         h2 {
             font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
+            font-weight: 600;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--fg-dim);
             margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
         }
 
         p {
             margin-bottom: 1rem;
-            font-size: 0.9rem;
+            color: var(--fg-dim);
         }
 
-        /* Catalog grid */
-        .catalog {
-            display: grid;
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
+        ul {
+            list-style: none;
+            margin-bottom: 1rem;
         }
 
-        .catalog-item {
-            background: var(--bg);
-            padding: 0.75rem 1rem;
-            display: grid;
-            grid-template-columns: 10ch 1fr 8ch;
-            gap: 1rem;
-            align-items: baseline;
-            font-size: 0.85rem;
+        li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .catalog-item:hover {
-            background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+        li:last-child {
+            border-bottom: none;
         }
 
-        .catalog-id {
-            font-weight: 600;
-        }
-
-        .catalog-id a {
-            color: inherit;
+        a {
+            color: var(--fg);
             text-decoration: none;
         }
 
-        .catalog-id a:hover {
+        a:hover {
             text-decoration: underline;
         }
 
-        .catalog-desc {
-            color: var(--fg-dim);
+        .tool-name {
+            font-weight: 600;
         }
 
-        .catalog-lang {
-            text-align: right;
-            font-size: 0.75rem;
+        .tool-desc {
             color: var(--fg-dim);
+            margin-left: 0.5rem;
         }
 
-        /* Code block */
+        .tool-desc::before {
+            content: "— ";
+        }
+
         pre {
             background: var(--bg);
             border: 1px solid var(--border);
             padding: 1rem;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             overflow-x: auto;
             margin: 1rem 0;
         }
 
-        code {
-            font-family: inherit;
-        }
-
-        /* Footer */
         footer {
-            margin-top: 3rem;
-            padding-top: 1rem;
+            margin-top: 4rem;
+            padding-top: 1.5rem;
             border-top: 1px solid var(--border);
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: var(--fg-dim);
-            display: flex;
-            justify-content: space-between;
         }
 
         footer a {
             color: var(--fg-dim);
-            text-decoration: none;
         }
 
         footer a:hover {
             color: var(--fg);
         }
 
-        /* Links */
-        a {
-            color: var(--fg);
-        }
-
-        /* Responsive */
-        @media (max-width: 50ch) {
-            .catalog-item {
-                grid-template-columns: 1fr;
-                gap: 0.25rem;
-            }
-            .catalog-lang {
-                text-align: left;
-            }
-            .header-grid {
-                grid-template-columns: 1fr;
-            }
-            .header-meta {
-                text-align: left;
-            }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-grid">
-            <h1>emes</h1>
-            <div class="header-meta">
-                est. 2024<br>
-                open source
-            </div>
-        </div>
-        <p class="tagline">Infrastructure for AI coding agents. Messaging, issue tracking, and quality gates for long-running autonomous tasks.</p>
+        <h1>emes</h1>
+        <p class="mission">
+            <strong>AI agents need infrastructure to work autonomously on long tasks.</strong>
+            We build the messaging, state management, and quality control systems that make this possible.
+        </p>
     </header>
 
     <section>
-        <h2>Catalog</h2>
-        <div class="catalog">
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/idle">idle</a></span>
-                <span class="catalog-desc">Quality gate plugin for Claude Code</span>
-                <span class="catalog-lang">Shell</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/zawinski">zawinski</a></span>
-                <span class="catalog-desc">Async messaging for agents</span>
-                <span class="catalog-lang">Zig</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/tissue">tissue</a></span>
-                <span class="catalog-desc">Git-native issue tracking</span>
-                <span class="catalog-lang">Zig</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/termcat">termcat</a></span>
-                <span class="catalog-desc">Cell-based terminal I/O</span>
-                <span class="catalog-lang">Zig</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/laser">laser</a></span>
-                <span class="catalog-desc">BEAM runtime</span>
-                <span class="catalog-lang">Zig</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/glypha">glypha</a></span>
-                <span class="catalog-desc">Constraint-based graphics DSL</span>
-                <span class="catalog-lang">Zig</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/bibval">bibval</a></span>
-                <span class="catalog-desc">BibTeX citation validator</span>
-                <span class="catalog-lang">Rust</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/loupe">loupe</a></span>
-                <span class="catalog-desc">Self-hosted semantic search</span>
-                <span class="catalog-lang">Elixir</span>
-            </div>
-            <div class="catalog-item">
-                <span class="catalog-id"><a href="https://github.com/evil-mind-evil-sword/absynthe">absynthe</a></span>
-                <span class="catalog-desc">Syndicated Actor Model</span>
-                <span class="catalog-lang">Elixir</span>
-            </div>
-        </div>
+        <h2>Tools</h2>
+        <ul>
+            <li><a href="https://github.com/evil-mind-evil-sword/idle"><span class="tool-name">idle</span></a><span class="tool-desc">quality gate for Claude Code</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/zawinski"><span class="tool-name">zawinski</span></a><span class="tool-desc">async messaging between agents</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/tissue"><span class="tool-name">tissue</span></a><span class="tool-desc">git-native issue tracking</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/glypha"><span class="tool-name">glypha</span></a><span class="tool-desc">programmatic diagram generation</span></li>
+            <li><a href="https://github.com/evil-mind-evil-sword/bibval"><span class="tool-name">bibval</span></a><span class="tool-desc">citation validation</span></li>
+        </ul>
     </section>
 
     <section>
         <h2>Install</h2>
-        <pre><code>curl -fsSL https://github.com/evil-mind-evil-sword/idle/releases/latest/download/install.sh | sh</code></pre>
+        <pre>curl -fsSL https://github.com/evil-mind-evil-sword/idle/releases/latest/download/install.sh | sh</pre>
+        <p>Or via the Claude Code marketplace:</p>
+        <pre>claude mcp add idle -- idle@emes</pre>
+    </section>
+
+    <section>
+        <h2>About</h2>
+        <p>
+            emes is a project by <a href="https://github.com/femtomc">McCoy Becker</a>,
+            a researcher working on programming languages and AI systems.
+        </p>
     </section>
 
     <footer>
-        <span>AGPL-3.0</span>
-        <a href="https://github.com/evil-mind-evil-sword">github.com/evil-mind-evil-sword</a>
+        <div class="footer-links">
+            <a href="https://github.com/evil-mind-evil-sword">GitHub</a>
+            <a href="https://github.com/femtomc">@femtomc</a>
+            <span>AGPL-3.0</span>
+        </div>
     </footer>
 </body>
 </html>
