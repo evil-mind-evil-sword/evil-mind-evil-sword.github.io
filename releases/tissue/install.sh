@@ -5,7 +5,7 @@ set -e
 # Usage: curl -fsSL https://evil-mind-evil-sword.github.io/releases/tissue/install.sh | sh
 
 RELEASES_BASE="https://evil-mind-evil-sword.github.io/releases"
-INSTALL_DIR="${TISSUE_INSTALL_DIR:-/usr/local/bin}"
+INSTALL_DIR="${TISSUE_INSTALL_DIR:-$HOME/.local/bin}"
 
 # Detect OS and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -41,13 +41,17 @@ trap "rm -rf $TMPDIR" EXIT
 curl -fsSL "$URL" -o "$TMPDIR/tissue"
 
 # Install
-if [ -w "$INSTALL_DIR" ]; then
-  mv "$TMPDIR/tissue" "$INSTALL_DIR/tissue"
-else
-  echo "Installing to $INSTALL_DIR (requires sudo)..."
-  sudo mv "$TMPDIR/tissue" "$INSTALL_DIR/tissue"
+mkdir -p "$INSTALL_DIR"
+mv "$TMPDIR/tissue" "$INSTALL_DIR/tissue"
+chmod +x "$INSTALL_DIR/tissue"
+
+echo "tissue installed to $INSTALL_DIR/tissue"
+
+if ! echo "$PATH" | grep -q "$INSTALL_DIR"; then
+  echo ""
+  echo "Add to your PATH:"
+  echo "  export PATH=\"$INSTALL_DIR:\$PATH\""
 fi
 
-chmod +x "$INSTALL_DIR/tissue"
-echo "tissue installed to $INSTALL_DIR/tissue"
+echo ""
 echo "Run 'tissue --help' to get started"
