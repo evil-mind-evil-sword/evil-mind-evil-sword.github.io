@@ -1,0 +1,4 @@
+d66bad401d649276126b4f6be9e7388f40d2eca70d1a75ef5fa2e6c1ecf2ac17  idle-linux-x86_64
+50317b07df373889c0190a0e24351239e7c7cdca84fe3bb33cb6602ac4af8726  idle-macos-aarch64
+af0b64a243e7ad9cb6efcb90580a727c2e497e92baa3ac1cb10fe24da3d74fd2  idle-macos-x86_64
+6b15d7f6e3eb3a22db3f89cce5ce1cc1e100097df686df05ad56edd46034dced  idle-plugin.tar.gz
