@@ -1,9 +1,9 @@
 {
   "zawinski": {
-    "version": "v26.1.13",
+    "version": "v26.1.14",
     "sizes": {
-      "jwz-linux-x86_64": 1158512,
-      "jwz-macos-aarch64": 1271488,
+      "jwz-linux-x86_64": 1158496,
+      "jwz-macos-aarch64": 1271408,
       "jwz-macos-x86_64": 1151469
     }
   },
