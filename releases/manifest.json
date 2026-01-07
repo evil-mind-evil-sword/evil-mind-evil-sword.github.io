@@ -26,12 +26,12 @@
     }
   },
   "idle": {
-    "version": "v26.1.15",
+    "version": "v26.1.17",
     "sizes": {
-      "idle-linux-x86_64": 1098176,
+      "idle-linux-x86_64": 1098224,
       "idle-macos-aarch64": 1186072,
-      "idle-macos-x86_64": 1083681,
-      "idle-plugin.tar.gz": 34921
+      "idle-macos-x86_64": 1083682,
+      "idle-plugin.tar.gz": 35852
     }
   }
 }
