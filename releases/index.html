@@ -100,43 +100,45 @@
 
         .install-cmd {
             background: #f0f0f0;
-            padding: 0.75rem 1rem;
             border-radius: 4px;
             font-size: 0.85rem;
             margin-bottom: 1rem;
-            overflow-x: auto;
-            white-space: nowrap;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
+            gap: 0;
         }
 
         .install-cmd code {
             color: var(--fg);
+            padding: 0.75rem 1rem;
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
         .copy-btn {
             background: none;
-            border: 1px solid var(--border);
-            border-radius: 3px;
-            padding: 0.2rem 0.5rem;
+            border: none;
+            border-right: 1px solid var(--border);
+            border-radius: 0;
+            padding: 0.75rem 0.75rem;
             font-family: inherit;
             font-size: 0.75rem;
             color: var(--fg-dim);
             cursor: pointer;
             flex-shrink: 0;
-            transition: color 0.15s, border-color 0.15s;
         }
 
         .copy-btn:hover {
             color: var(--accent);
-            border-color: var(--accent);
         }
 
-        .copy-btn.copied {
-            color: var(--accent);
-            border-color: var(--accent);
+        @keyframes flash {
+            0%, 100% { background: transparent; }
+            50% { background: var(--accent); color: #fff; }
+        }
+
+        .copy-btn.flash {
+            animation: flash 0.2s ease-out;
         }
 
         .downloads {
@@ -263,14 +265,11 @@
         }
 
         function copyCmd(btn) {
-            const cmd = btn.previousElementSibling.textContent;
+            const cmd = btn.nextElementSibling.textContent;
             navigator.clipboard.writeText(cmd).then(() => {
-                btn.textContent = 'copied';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = 'copy';
-                    btn.classList.remove('copied');
-                }, 2000);
+                btn.classList.remove('flash');
+                void btn.offsetWidth; // reflow to restart animation
+                btn.classList.add('flash');
             });
         }
 
@@ -302,8 +301,8 @@
                                 ${info.description}
                             </p>
                             <div class="install-cmd">
-                                <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/${pkg}/install.sh | sh</code>
                                 <button class="copy-btn" onclick="copyCmd(this)">copy</button>
+                                <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/${pkg}/install.sh | sh</code>
                             </div>
                             <div class="downloads">
                                 ${info.artifacts.map(a => {
