@@ -29,7 +29,7 @@ ASSET="bibval-${ARCH}-${OS}"
 if [ -n "$BIBVAL_VERSION" ]; then
   VERSION="$BIBVAL_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"bibval"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -A1 '"bibval"' | grep '"version"' | sed 's/.*"version"[^"]*"\([^"]*\)".*/\1/')
 fi
 
 URL="${RELEASES_BASE}/bibval/${VERSION}/${ASSET}"

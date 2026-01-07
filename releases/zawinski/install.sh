@@ -29,7 +29,7 @@ BINARY="jwz-${OS}-${ARCH}"
 if [ -n "$JWZ_VERSION" ]; then
   VERSION="$JWZ_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"zawinski"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -A1 '"zawinski"' | grep '"version"' | sed 's/.*"version"[^"]*"\([^"]*\)".*/\1/')
 fi
 
 URL="${RELEASES_BASE}/zawinski/${VERSION}/${BINARY}"

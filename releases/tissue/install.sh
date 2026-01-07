@@ -29,7 +29,7 @@ ASSET="tissue-${ARCH}-${OS}"
 if [ -n "$TISSUE_VERSION" ]; then
   VERSION="$TISSUE_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"tissue"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -A1 '"tissue"' | grep '"version"' | sed 's/.*"version"[^"]*"\([^"]*\)".*/\1/')
 fi
 
 URL="${RELEASES_BASE}/tissue/${VERSION}/${ASSET}"
