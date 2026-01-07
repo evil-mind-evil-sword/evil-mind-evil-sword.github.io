@@ -17,12 +17,12 @@
     }
   },
   "bibval": {
-    "version": "v26.1.10",
+    "version": "v26.1.11",
     "sizes": {
-      "bibval-aarch64-linux": 8523360,
-      "bibval-aarch64-macos": 1027096,
-      "bibval-x86_64-linux": 7974128,
-      "bibval-x86_64-macos": 1132974
+      "bibval-aarch64-linux": 479808,
+      "bibval-aarch64-macos": 540136,
+      "bibval-x86_64-linux": 530784,
+      "bibval-x86_64-macos": 552069
     }
   },
   "idle": {
