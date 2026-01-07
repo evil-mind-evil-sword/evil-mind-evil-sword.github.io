@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="emes releases - Download binaries for emes tools">
+    <title>emes releases</title>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --fg: #1a1a1a;
+            --fg-dim: #555;
+            --border: #ddd;
+            --accent: #0066cc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { font-size: 14px; }
+
+        body {
+            font-family: "Berkeley Mono", monospace;
+            line-height: 1.6;
+            color: var(--fg);
+            background: var(--bg);
+            padding: 3rem 2rem;
+            max-width: 65ch;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 a {
+            color: var(--fg);
+            text-decoration: none;
+        }
+
+        h1 a:hover {
+            text-decoration: underline;
+        }
+
+        .subtitle {
+            color: var(--fg-dim);
+            font-size: 0.9rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--fg-dim);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .package {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .package:last-child {
+            border-bottom: none;
+        }
+
+        .package-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .package-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .package-version {
+            color: var(--fg-dim);
+            font-size: 0.9rem;
+        }
+
+        .install-cmd {
+            background: #f0f0f0;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .install-cmd code {
+            color: var(--fg);
+        }
+
+        .downloads {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .download-link {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+        }
+
+        .download-link:hover {
+            background: #f0f0f0;
+            text-decoration: none;
+        }
+
+        .loading {
+            color: var(--fg-dim);
+            font-style: italic;
+        }
+
+        .error {
+            color: #c00;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--fg-dim);
+        }
+
+        footer a {
+            color: var(--fg-dim);
+        }
+
+        footer a:hover {
+            color: var(--fg);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/">emes</a> / releases</h1>
+        <p class="subtitle">Pre-built binaries for emes tools</p>
+    </header>
+
+    <section>
+        <h2>Quick Install</h2>
+        <p style="color: var(--fg-dim); margin-bottom: 1rem;">
+            Each tool can be installed with a single command:
+        </p>
+        <div class="install-cmd">
+            <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/{tool}/install.sh | sh</code>
+        </div>
+    </section>
+
+    <section>
+        <h2>Available Releases</h2>
+        <div id="releases">
+            <p class="loading">Loading releases...</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="https://github.com/evil-mind-evil-sword">GitHub</a>
+        </div>
+    </footer>
+
+    <script>
+        const PACKAGE_INFO = {
+            idle: {
+                description: 'Quality gate for Claude Code',
+                artifacts: ['idle-linux-x86_64', 'idle-macos-x86_64', 'idle-macos-aarch64']
+            },
+            zawinski: {
+                description: 'Email for agents',
+                artifacts: ['jwz-linux-x86_64', 'jwz-macos-x86_64', 'jwz-macos-aarch64']
+            },
+            tissue: {
+                description: 'Issue tracking for agents',
+                artifacts: ['tissue-x86_64-linux', 'tissue-aarch64-linux', 'tissue-x86_64-macos', 'tissue-aarch64-macos']
+            },
+            bibval: {
+                description: 'BibTeX validation',
+                artifacts: ['bibval-x86_64-linux', 'bibval-aarch64-linux', 'bibval-x86_64-macos', 'bibval-aarch64-macos']
+            },
+            termcat: {
+                description: 'Terminal rendering library',
+                artifacts: ['termcat-x86_64-linux', 'termcat-aarch64-linux', 'termcat-x86_64-macos', 'termcat-aarch64-macos']
+            }
+        };
+
+        async function loadReleases() {
+            const container = document.getElementById('releases');
+
+            try {
+                const response = await fetch('/releases/manifest.json');
+                if (!response.ok) throw new Error('Failed to load manifest');
+
+                const manifest = await response.json();
+
+                let html = '';
+
+                for (const [pkg, version] of Object.entries(manifest)) {
+                    const info = PACKAGE_INFO[pkg] || { description: '', artifacts: [] };
+                    const baseUrl = `/releases/${pkg}/${version}`;
+
+                    html += `
+                        <div class="package">
+                            <div class="package-header">
+                                <span class="package-name">${pkg}</span>
+                                <span class="package-version">${version}</span>
+                            </div>
+                            <p style="color: var(--fg-dim); margin-bottom: 0.75rem; font-size: 0.9rem;">
+                                ${info.description}
+                            </p>
+                            <div class="install-cmd">
+                                <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/${pkg}/install.sh | sh</code>
+                            </div>
+                            <div class="downloads">
+                                ${info.artifacts.map(a =>
+                                    `<a href="${baseUrl}/${a}" class="download-link">${a}</a>`
+                                ).join('')}
+                                <a href="${baseUrl}/checksums.txt" class="download-link">checksums</a>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = html || '<p class="loading">No releases found</p>';
+
+            } catch (err) {
+                container.innerHTML = `<p class="error">Error loading releases: ${err.message}</p>`;
+            }
+        }
+
+        loadReleases();
+    </script>
+</body>
+</html>
