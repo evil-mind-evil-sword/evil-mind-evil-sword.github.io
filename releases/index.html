@@ -106,10 +106,37 @@
             margin-bottom: 1rem;
             overflow-x: auto;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
         .install-cmd code {
             color: var(--fg);
+        }
+
+        .copy-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 0.2rem 0.5rem;
+            font-family: inherit;
+            font-size: 0.75rem;
+            color: var(--fg-dim);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .copy-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .copy-btn.copied {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
         .downloads {
@@ -185,6 +212,9 @@
         <div class="install-cmd">
             <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/{tool}/install.sh | sh</code>
         </div>
+        <p style="color: var(--fg-dim); font-size: 0.85rem;">
+            Replace <code>{tool}</code> with: idle, zawinski, tissue, bibval, or laser
+        </p>
     </section>
 
     <section>
@@ -232,6 +262,18 @@
             return (bytes / (1024 * 1024)).toFixed(1) + 'M';
         }
 
+        function copyCmd(btn) {
+            const cmd = btn.previousElementSibling.textContent;
+            navigator.clipboard.writeText(cmd).then(() => {
+                btn.textContent = 'copied';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
         async function loadReleases() {
             const container = document.getElementById('releases');
 
@@ -261,6 +303,7 @@
                             </p>
                             <div class="install-cmd">
                                 <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/${pkg}/install.sh | sh</code>
+                                <button class="copy-btn" onclick="copyCmd(this)">copy</button>
                             </div>
                             <div class="downloads">
                                 ${info.artifacts.map(a => {
