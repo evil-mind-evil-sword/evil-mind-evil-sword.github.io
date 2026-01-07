@@ -133,6 +133,12 @@
             text-decoration: none;
         }
 
+        .binary-size {
+            color: var(--fg-dim);
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+        }
+
         .loading {
             color: var(--fg-dim);
             font-style: italic;
@@ -219,6 +225,13 @@
             }
         };
 
+        function formatSize(bytes) {
+            if (bytes === undefined) return '';
+            if (bytes < 1024) return bytes + 'B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + 'K';
+            return (bytes / (1024 * 1024)).toFixed(1) + 'M';
+        }
+
         async function loadReleases() {
             const container = document.getElementById('releases');
 
@@ -230,7 +243,10 @@
 
                 let html = '';
 
-                for (const [pkg, version] of Object.entries(manifest)) {
+                for (const [pkg, data] of Object.entries(manifest)) {
+                    // Support both old format (string) and new format (object with version/sizes)
+                    const version = typeof data === 'string' ? data : data.version;
+                    const sizes = typeof data === 'object' ? (data.sizes || {}) : {};
                     const info = PACKAGE_INFO[pkg] || { description: '', artifacts: [] };
                     const baseUrl = `/releases/${pkg}/${version}`;
 
@@ -247,9 +263,11 @@
                                 <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/${pkg}/install.sh | sh</code>
                             </div>
                             <div class="downloads">
-                                ${info.artifacts.map(a =>
-                                    `<a href="${baseUrl}/${a}" class="download-link">${a}</a>`
-                                ).join('')}
+                                ${info.artifacts.map(a => {
+                                    const size = sizes[a];
+                                    const sizeStr = size ? ` <span class="binary-size">${formatSize(size)}</span>` : '';
+                                    return `<a href="${baseUrl}/${a}" class="download-link">${a}${sizeStr}</a>`;
+                                }).join('')}
                                 <a href="${baseUrl}/checksums.txt" class="download-link">checksums</a>
                             </div>
                         </div>
