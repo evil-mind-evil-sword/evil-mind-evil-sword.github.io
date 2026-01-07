@@ -7,10 +7,12 @@
     <title>emes</title>
     <style>
         :root {
-            --bg: #fafafa;
-            --fg: #1a1a1a;
-            --fg-dim: #555;
-            --border: #ddd;
+            --bg: #fff;
+            --fg: #000;
+            --fg-dim: #444;
+            --border: #ccc;
+            --accent: #0046ad;
+            --accent-hover: #002d70;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,16 +86,18 @@
         }
 
         a {
-            color: var(--fg);
+            color: var(--accent);
             text-decoration: none;
         }
 
         a:hover {
+            color: var(--accent-hover);
             text-decoration: underline;
         }
 
         .tool-name {
             font-weight: 600;
+            color: var(--accent);
         }
 
         .tool-desc {
@@ -103,6 +107,7 @@
 
         .tool-desc::before {
             content: "— ";
+            color: var(--border);
         }
 
         footer {
