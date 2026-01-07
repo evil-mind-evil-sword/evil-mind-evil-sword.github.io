@@ -1,3 +1,0 @@
-750bfcfc52173a1a153c62f0cb8137a9e72a40ea26b2ee8aee851fc98d0a04e7  jwz-linux-x86_64
-c2f4731e0c84a72fd6488083df15eb50c4fe7f3c55f5039428b9baa3129caec3  jwz-macos-aarch64
-a51d4461d97bfc6e6e64c7dcc5771eabd7c458b4a9a6edfe258b6cbbb30efea9  jwz-macos-x86_64
