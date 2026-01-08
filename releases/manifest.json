@@ -33,5 +33,14 @@
       "idle-macos-x86_64": 1161558,
       "idle-plugin.tar.gz": 36242
     }
+  },
+  "alice": {
+    "version": "v26.1.23",
+    "sizes": {
+      "alice-linux-x86_64": 1169600,
+      "alice-macos-aarch64": 1271960,
+      "alice-macos-x86_64": 1161559,
+      "alice-plugin.tar.gz": 28825
+    }
   }
 }
