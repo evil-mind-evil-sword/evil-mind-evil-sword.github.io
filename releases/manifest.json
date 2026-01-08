@@ -1,10 +1,10 @@
 {
   "zawinski": {
-    "version": "v26.1.14",
+    "version": "v26.1.15",
     "sizes": {
-      "jwz-linux-x86_64": 1158496,
-      "jwz-macos-aarch64": 1271408,
-      "jwz-macos-x86_64": 1151469
+      "jwz-linux-x86_64": 1177808,
+      "jwz-macos-aarch64": 1290672,
+      "jwz-macos-x86_64": 1173442
     }
   },
   "tissue": {
