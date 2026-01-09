@@ -1,10 +1,10 @@
 {
   "jwz": {
-    "version": "v26.1.17",
+    "version": "v26.1.18",
     "sizes": {
-      "jwz-linux-x86_64": 1177808,
-      "jwz-macos-aarch64": 1290672,
-      "jwz-macos-x86_64": 1173442
+      "jwz-linux-x86_64": 1177856,
+      "jwz-macos-aarch64": 1290784,
+      "jwz-macos-x86_64": 1173477
     }
   },
   "tissue": {
