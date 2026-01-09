@@ -215,7 +215,7 @@
             <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/{tool}/install.sh | sh</code>
         </div>
         <p style="color: var(--fg-dim); font-size: 0.85rem;">
-            Replace <code>{tool}</code> with: idle, jwz, tissue, bibval, or laser
+            Replace <code>{tool}</code> with: alice, jwz, tissue, bibval, or vecky
         </p>
     </section>
 
@@ -235,25 +235,25 @@
 
     <script>
         const PACKAGE_INFO = {
-            idle: {
-                description: 'Quality gate for Claude Code',
-                artifacts: ['idle-linux-x86_64', 'idle-macos-x86_64', 'idle-macos-aarch64']
+            alice: {
+                description: 'Agentic harness for Claude Code',
+                artifacts: ['alice-linux-x86_64', 'alice-linux-aarch64', 'alice-macos-x86_64', 'alice-macos-aarch64']
             },
             jwz: {
                 description: 'Email for agents',
-                artifacts: ['jwz-linux-x86_64', 'jwz-macos-x86_64', 'jwz-macos-aarch64']
+                artifacts: ['jwz-linux-x86_64', 'jwz-linux-aarch64', 'jwz-macos-x86_64', 'jwz-macos-aarch64']
             },
             tissue: {
                 description: 'Issue tracking for agents',
-                artifacts: ['tissue-x86_64-linux', 'tissue-aarch64-linux', 'tissue-x86_64-macos', 'tissue-aarch64-macos']
+                artifacts: ['tissue-linux-x86_64', 'tissue-linux-aarch64', 'tissue-macos-x86_64', 'tissue-macos-aarch64']
             },
             bibval: {
                 description: 'BibTeX validation',
-                artifacts: ['bibval-x86_64-linux', 'bibval-aarch64-linux', 'bibval-x86_64-macos', 'bibval-aarch64-macos']
+                artifacts: ['bibval-linux-x86_64', 'bibval-linux-aarch64', 'bibval-macos-x86_64', 'bibval-macos-aarch64']
             },
-            laser: {
-                description: 'BEAM runtime in Zig',
-                artifacts: ['laser-x86_64-linux', 'laser-aarch64-linux', 'laser-x86_64-macos', 'laser-aarch64-macos']
+            vecky: {
+                description: 'Self-hosted semantic search',
+                artifacts: ['vecky-linux-x86_64', 'vecky-linux-aarch64', 'vecky-macos-x86_64', 'vecky-macos-aarch64']
             }
         };
 
