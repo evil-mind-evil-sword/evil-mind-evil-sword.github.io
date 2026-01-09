@@ -145,16 +145,45 @@
 
     <section>
         <h2>Tools</h2>
-        <ul>
-            <li><a href="https://github.com/evil-mind-evil-sword/idle"><span class="tool-name">idle</span></a><span class="tool-desc">quality gate that blocks exit until independent review passes</span></li>
-            <li><a href="https://github.com/evil-mind-evil-sword/jwz"><span class="tool-name">jwz</span></a><span class="tool-desc">email for agents</span></li>
-            <li><a href="https://github.com/evil-mind-evil-sword/tissue"><span class="tool-name">tissue</span></a><span class="tool-desc">issue tracking for agents</span></li>
-            <li><a href="https://github.com/evil-mind-evil-sword/bibval"><span class="tool-name">bibval</span></a><span class="tool-desc">BibTeX validation against academic databases</span></li>
-            <li><a href="https://github.com/evil-mind-evil-sword/laser"><span class="tool-name">laser</span></a><span class="tool-desc">BEAM runtime in Zig for instant CLI startup</span></li>
-            <li><a href="https://github.com/evil-mind-evil-sword/vecky"><span class="tool-name">vecky</span></a><span class="tool-desc">semantic search for agents</span></li>
+        <ul id="tools-list">
+            <li class="loading" style="color: var(--fg-dim); font-style: italic;">Loading...</li>
         </ul>
         <p style="margin-top: 1rem;"><a href="/releases/">View all releases &rarr;</a></p>
     </section>
+
+    <script>
+        // Fetch public repos from GitHub org
+        const EXCLUDED = ['marketplace', '.github', 'evil-mind-evil-sword.github.io'];
+
+        async function loadTools() {
+            const list = document.getElementById('tools-list');
+            try {
+                const res = await fetch('https://api.github.com/orgs/evil-mind-evil-sword/repos?type=public&sort=pushed');
+                if (!res.ok) throw new Error('Failed to fetch repos');
+
+                const repos = await res.json();
+                const tools = repos
+                    .filter(r => !r.fork && !EXCLUDED.includes(r.name))
+                    .sort((a, b) => a.name.localeCompare(b.name));
+
+                if (tools.length === 0) {
+                    list.innerHTML = '<li style="color: var(--fg-dim);">No tools found</li>';
+                    return;
+                }
+
+                list.innerHTML = tools.map(r => `
+                    <li>
+                        <a href="${r.html_url}"><span class="tool-name">${r.name}</span></a>
+                        ${r.description ? `<span class="tool-desc">${r.description}</span>` : ''}
+                    </li>
+                `).join('');
+            } catch (err) {
+                list.innerHTML = '<li style="color: #c00;">Error loading tools</li>';
+            }
+        }
+
+        loadTools();
+    </script>
 
     <section>
         <h2>About</h2>
