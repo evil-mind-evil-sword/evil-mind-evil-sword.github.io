@@ -41,9 +41,9 @@ BINARY="alice-${OS}-${ARCH}"
 if [ -n "$ALICE_VERSION" ]; then
   VERSION="$ALICE_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | grep -o '"alice"[^}]*' | grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/' || echo "")
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"alice":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
   if [ -z "$VERSION" ]; then
-    VERSION="v26.1.23"
+    VERSION="v26.1.24"
   fi
 fi
 

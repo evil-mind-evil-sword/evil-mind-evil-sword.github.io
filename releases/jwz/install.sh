@@ -29,7 +29,10 @@ BINARY="jwz-${OS}-${ARCH}"
 if [ -n "$JWZ_VERSION" ]; then
   VERSION="$JWZ_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"jwz"[[:space:]]*:[[:space:]]*{[^}]*"version"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"jwz":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
+  if [ -z "$VERSION" ]; then
+    VERSION="v26.1.15"
+  fi
 fi
 
 URL="${RELEASES_BASE}/jwz/${VERSION}/${BINARY}"

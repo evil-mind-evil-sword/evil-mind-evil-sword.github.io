@@ -25,15 +25,6 @@
       "bibval-x86_64-macos": 552069
     }
   },
-  "idle": {
-    "version": "v26.1.22",
-    "sizes": {
-      "idle-linux-x86_64": 1169568,
-      "idle-macos-aarch64": 1271960,
-      "idle-macos-x86_64": 1161558,
-      "idle-plugin.tar.gz": 36242
-    }
-  },
   "alice": {
     "version": "v26.1.29",
     "sizes": {

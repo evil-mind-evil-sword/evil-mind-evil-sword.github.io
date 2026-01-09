@@ -29,7 +29,10 @@ ASSET="tissue-${ARCH}-${OS}"
 if [ -n "$TISSUE_VERSION" ]; then
   VERSION="$TISSUE_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"tissue"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"tissue":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
+  if [ -z "$VERSION" ]; then
+    VERSION="v26.1.16"
+  fi
 fi
 
 URL="${RELEASES_BASE}/tissue/${VERSION}/${ASSET}"
