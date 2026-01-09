@@ -35,12 +35,12 @@
     }
   },
   "vecky": {
-    "version": "v26.1.9",
+    "version": "v26.1.10",
     "sizes": {
-      "vecky-aarch64-linux": 464696,
-      "vecky-aarch64-macos": 536088,
-      "vecky-x86_64-linux": 516656,
-      "vecky-x86_64-macos": 533778
+      "vecky-aarch64-linux": 466344,
+      "vecky-aarch64-macos": 536600,
+      "vecky-x86_64-linux": 518176,
+      "vecky-x86_64-macos": 534174
     }
   }
 }
