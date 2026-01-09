@@ -85,10 +85,10 @@ if ! command -v jq >/dev/null 2>&1; then
     fi
 fi
 
-# Install jwz (zawinski)
+# Install jwz
 if ! command -v jwz >/dev/null 2>&1; then
-    echo "Installing jwz (zawinski)..."
-    curl -fsSL "${RELEASES_BASE}/zawinski/install.sh" | sh
+    echo "Installing jwz..."
+    curl -fsSL "${RELEASES_BASE}/jwz/install.sh" | sh
 fi
 
 # Install tissue

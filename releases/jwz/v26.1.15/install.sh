@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# zawinski installer
-# Usage: curl -fsSL https://evil-mind-evil-sword.github.io/releases/zawinski/install.sh | sh
+# jwz installer
+# Usage: curl -fsSL https://evil-mind-evil-sword.github.io/releases/jwz/install.sh | sh
 
 RELEASES_BASE="https://evil-mind-evil-sword.github.io/releases"
 INSTALL_DIR="${JWZ_INSTALL_DIR:-$HOME/.local/bin}"
@@ -29,10 +29,10 @@ BINARY="jwz-${OS}-${ARCH}"
 if [ -n "$JWZ_VERSION" ]; then
   VERSION="$JWZ_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"zawinski"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" | grep -o '"jwz"[[:space:]]*:[[:space:]]*{[^}]*"version"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
 fi
 
-URL="${RELEASES_BASE}/zawinski/${VERSION}/${BINARY}"
+URL="${RELEASES_BASE}/jwz/${VERSION}/${BINARY}"
 
 echo "Installing jwz ${VERSION} for ${OS}/${ARCH}..."
 
