@@ -158,7 +158,7 @@
         async function loadTools() {
             const list = document.getElementById('tools-list');
             try {
-                const res = await fetch('https://api.github.com/orgs/evil-mind-evil-sword/repos?type=public&sort=pushed');
+                const res = await fetch('https://api.github.com/orgs/evil-mind-evil-sword/repos?type=public&per_page=100');
                 if (!res.ok) throw new Error('Failed to fetch repos');
 
                 const repos = await res.json();
