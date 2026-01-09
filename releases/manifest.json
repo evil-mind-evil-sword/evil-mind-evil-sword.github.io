@@ -8,12 +8,12 @@
     }
   },
   "tissue": {
-    "version": "v26.1.18",
+    "version": "v26.1.19",
     "sizes": {
-      "tissue-aarch64-linux": 1149456,
-      "tissue-aarch64-macos": 1269400,
-      "tissue-x86_64-linux": 1169392,
-      "tissue-x86_64-macos": 1159991
+      "tissue-linux-aarch64": 1150208,
+      "tissue-linux-x86_64": 1169808,
+      "tissue-macos-aarch64": 1269512,
+      "tissue-macos-x86_64": 1160020
     }
   },
   "bibval": {
@@ -26,12 +26,13 @@
     }
   },
   "alice": {
-    "version": "v26.1.30",
+    "version": "v26.1.31",
     "sizes": {
-      "alice-linux-x86_64": 1172832,
-      "alice-macos-aarch64": 1272600,
-      "alice-macos-x86_64": 1165742,
-      "alice-plugin.tar.gz": 29080
+      "alice-linux-aarch64": 1148336,
+      "alice-linux-x86_64": 1173920,
+      "alice-macos-aarch64": 1272968,
+      "alice-macos-x86_64": 1170013,
+      "alice-plugin.tar.gz": 29116
     }
   },
   "vecky": {
