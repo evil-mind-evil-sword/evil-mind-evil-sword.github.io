@@ -164,7 +164,7 @@
                 const repos = await res.json();
                 const tools = repos
                     .filter(r => !r.fork && !EXCLUDED.includes(r.name))
-                    .sort((a, b) => a.name.localeCompare(b.name));
+                    .sort((a, b) => b.stargazers_count - a.stargazers_count);
 
                 if (tools.length === 0) {
                     list.innerHTML = '<li style="color: var(--fg-dim);">No tools found</li>';
