@@ -145,18 +145,17 @@
 
     <section>
         <h2>Tools</h2>
-        <ul id="tools-list">
-            <li class="loading" style="color: var(--fg-dim); font-style: italic;">Loading...</li>
-        </ul>
+        <p id="tools-list" style="line-height: 2;">
+            <span style="color: var(--fg-dim); font-style: italic;">Loading...</span>
+        </p>
         <p style="margin-top: 1rem;"><a href="/releases/">View all releases &rarr;</a></p>
     </section>
 
     <script>
-        // Fetch public repos from GitHub org
         const EXCLUDED = ['marketplace', '.github', 'evil-mind-evil-sword.github.io'];
 
         async function loadTools() {
-            const list = document.getElementById('tools-list');
+            const container = document.getElementById('tools-list');
             try {
                 const res = await fetch('https://api.github.com/orgs/evil-mind-evil-sword/repos?type=public&per_page=100');
                 if (!res.ok) throw new Error('Failed to fetch repos');
@@ -167,18 +166,15 @@
                     .sort((a, b) => b.stargazers_count - a.stargazers_count);
 
                 if (tools.length === 0) {
-                    list.innerHTML = '<li style="color: var(--fg-dim);">No tools found</li>';
+                    container.innerHTML = '<span style="color: var(--fg-dim);">No tools found</span>';
                     return;
                 }
 
-                list.innerHTML = tools.map(r => `
-                    <li>
-                        <a href="${r.html_url}"><span class="tool-name">${r.name}</span></a>
-                        ${r.description ? `<span class="tool-desc">${r.description}</span>` : ''}
-                    </li>
-                `).join('');
+                container.innerHTML = tools
+                    .map(r => `<a href="${r.html_url}" style="font-weight: 600;">${r.name}</a>`)
+                    .join(' · ');
             } catch (err) {
-                list.innerHTML = '<li style="color: #c00;">Error loading tools</li>';
+                container.innerHTML = '<span style="color: #c00;">Error loading tools</span>';
             }
         }
 
