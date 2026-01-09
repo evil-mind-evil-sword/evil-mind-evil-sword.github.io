@@ -31,7 +31,7 @@ if [ -n "$JWZ_VERSION" ]; then
 else
   VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"jwz":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
   if [ -z "$VERSION" ]; then
-    VERSION="v26.1.15"
+    VERSION="v26.1.19"
   fi
 fi
 
