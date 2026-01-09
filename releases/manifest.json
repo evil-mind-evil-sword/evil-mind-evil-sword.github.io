@@ -17,7 +17,7 @@
     }
   },
   "bibval": {
-    "version": "v26.1.11",
+    "version": "v26.1.12",
     "sizes": {
       "bibval-aarch64-linux": 479808,
       "bibval-aarch64-macos": 540136,
