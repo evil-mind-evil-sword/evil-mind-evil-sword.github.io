@@ -8,7 +8,7 @@
     }
   },
   "tissue": {
-    "version": "v26.1.17",
+    "version": "v26.1.18",
     "sizes": {
       "tissue-aarch64-linux": 1149456,
       "tissue-aarch64-macos": 1269400,
