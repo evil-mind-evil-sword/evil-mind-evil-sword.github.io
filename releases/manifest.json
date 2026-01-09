@@ -35,7 +35,7 @@
     }
   },
   "vecky": {
-    "version": "v26.1.11",
+    "version": "v26.1.12",
     "sizes": {
       "vecky-aarch64-linux": 466424,
       "vecky-aarch64-macos": 536600,

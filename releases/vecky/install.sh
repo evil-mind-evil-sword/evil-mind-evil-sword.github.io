@@ -31,7 +31,7 @@ if [ -n "$VECKY_VERSION" ]; then
 else
   VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"vecky":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
   if [ -z "$VERSION" ]; then
-    VERSION="v26.1.11"
+    VERSION="v26.1.12"
   fi
 fi
 
