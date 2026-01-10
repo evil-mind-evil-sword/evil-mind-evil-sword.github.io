@@ -4,141 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="emes releases - Download binaries for emes tools">
-    <title>emes releases</title>
+    <title>emes / releases</title>
     <style>
-        :root {
-            --bg: #fff;
-            --fg: #000;
-            --fg-dim: #444;
-            --border: #ccc;
-            --accent: #0046ad;
-            --accent-hover: #002d70;
-        }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html { font-size: 14px; }
+        html { font-size: 15px; }
 
         body {
-            font-family: "Berkeley Mono", monospace;
+            font-family: "Berkeley Mono", "SF Mono", "Consolas", monospace;
             line-height: 1.6;
-            color: var(--fg);
-            background: var(--bg);
-            padding: 3rem 2rem;
-            max-width: 65ch;
+            color: #000;
+            background: #fff;
+            padding: 2rem;
+            max-width: 72ch;
             margin: 0 auto;
         }
 
+        /* ═══════════════════════════════════════ */
+        /* HEADER                                  */
+        /* ═══════════════════════════════════════ */
+
         header {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid #000;
         }
 
-        h1 {
+        .breadcrumb {
             font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
         }
 
-        h1 a {
-            color: var(--fg);
+        .breadcrumb a {
+            color: #000;
             text-decoration: none;
         }
 
-        h1 a:hover {
-            text-decoration: underline;
+        .breadcrumb a:hover {
+            background: #000;
+            color: #fff;
+            padding: 0 4px;
+            margin: 0 -4px;
         }
 
         .subtitle {
-            color: var(--fg-dim);
             font-size: 0.9rem;
         }
 
-        section {
-            margin-bottom: 3rem;
+        /* ═══════════════════════════════════════ */
+        /* ASCII BOX COMPONENTS                    */
+        /* ═══════════════════════════════════════ */
+
+        .box {
+            border: 3px solid #000;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
         }
 
-        h2 {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
+        .box::before {
+            content: attr(data-label);
+            position: absolute;
+            top: -0.75rem;
+            left: 1rem;
+            background: #fff;
+            padding: 0 0.5rem;
+            font-weight: 700;
             text-transform: uppercase;
-            color: var(--fg-dim);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
         }
+
+        /* ═══════════════════════════════════════ */
+        /* QUICK INSTALL                           */
+        /* ═══════════════════════════════════════ */
+
+        .install-hint {
+            margin-bottom: 1rem;
+        }
+
+        .install-cmd {
+            background: #000;
+            color: #fff;
+            padding: 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .install-cmd::before {
+            content: "$ ";
+            opacity: 0.6;
+        }
+
+        .install-note {
+            font-size: 0.85rem;
+        }
+
+        .install-note code {
+            background: #000;
+            color: #fff;
+            padding: 0.1rem 0.4rem;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* PACKAGE                                 */
+        /* ═══════════════════════════════════════ */
 
         .package {
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
+            border: 2px solid #000;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .package:last-child {
-            border-bottom: none;
+            margin-bottom: 0;
         }
 
         .package-header {
             display: flex;
             align-items: baseline;
             gap: 1rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #000;
         }
 
         .package-name {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
-            color: var(--accent);
+            text-transform: uppercase;
         }
 
         .package-version {
-            color: var(--fg-dim);
-            font-size: 0.9rem;
-        }
-
-        .install-cmd {
-            background: #f0f0f0;
-            border-radius: 4px;
             font-size: 0.85rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0;
+            border: 1px solid #000;
+            padding: 0.1rem 0.4rem;
         }
 
-        .install-cmd code {
-            color: var(--fg);
-            padding: 0.75rem 1rem;
-            overflow-x: auto;
-            white-space: nowrap;
+        .package-desc {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .package-install {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 1rem;
+            border: 2px solid #000;
         }
 
         .copy-btn {
-            background: none;
+            background: #000;
+            color: #fff;
             border: none;
-            border-right: 1px solid var(--border);
-            border-radius: 0;
-            padding: 0.75rem 0.75rem;
+            padding: 0.6rem 0.8rem;
             font-family: inherit;
-            font-size: 0.75rem;
-            color: var(--fg-dim);
+            font-size: 0.8rem;
+            font-weight: 700;
             cursor: pointer;
-            flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .copy-btn:hover {
-            color: var(--accent);
+            background: #fff;
+            color: #000;
         }
 
-        @keyframes flash {
-            0%, 100% { background: transparent; }
-            50% { background: var(--accent); color: #fff; }
+        .copy-btn.copied::after {
+            content: " ✓";
         }
 
-        .copy-btn.flash {
-            animation: flash 0.2s ease-out;
+        .package-install code {
+            padding: 0.6rem 0.8rem;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: nowrap;
+            flex: 1;
         }
 
         .downloads {
@@ -148,88 +195,108 @@
         }
 
         .download-link {
-            font-size: 0.8rem;
-            color: var(--accent);
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border: 2px solid #000;
             text-decoration: none;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: 3px;
+            color: #000;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .download-link:hover {
-            background: #f5f5f5;
-            color: var(--accent-hover);
-            text-decoration: none;
+            background: #000;
+            color: #fff;
         }
 
         .binary-size {
-            color: var(--fg-dim);
-            font-size: 0.75rem;
-            margin-left: 0.25rem;
+            opacity: 0.6;
+            font-weight: 400;
         }
 
+        /* ═══════════════════════════════════════ */
+        /* STATES                                  */
+        /* ═══════════════════════════════════════ */
+
         .loading {
-            color: var(--fg-dim);
             font-style: italic;
         }
 
         .error {
-            color: #c00;
+            background: #000;
+            color: #fff;
+            padding: 1rem;
+            font-weight: 700;
         }
+
+        /* ═══════════════════════════════════════ */
+        /* DIVIDER                                 */
+        /* ═══════════════════════════════════════ */
+
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 0.85rem;
+            letter-spacing: 0.5em;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* FOOTER                                  */
+        /* ═══════════════════════════════════════ */
 
         footer {
-            margin-top: 4rem;
+            margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.85rem;
-            color: var(--fg-dim);
-        }
-
-        footer a {
-            color: var(--fg-dim);
-        }
-
-        footer a:hover {
-            color: var(--fg);
+            border-top: 3px solid #000;
+            text-align: center;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
+
+        .footer-links a {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #000;
+            text-decoration: none;
+            color: #000;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a:hover {
+            background: #000;
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
     <header>
-        <h1><a href="/">emes</a> / releases</h1>
+        <p class="breadcrumb"><a href="/">emes</a> / releases</p>
         <p class="subtitle">Pre-built binaries for emes tools</p>
     </header>
 
-    <section>
-        <h2>Quick Install</h2>
-        <p style="color: var(--fg-dim); margin-bottom: 1rem;">
-            Each tool can be installed with a single command:
-        </p>
-        <div class="install-cmd">
-            <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/{tool}/install.sh | sh</code>
-        </div>
-        <p style="color: var(--fg-dim); font-size: 0.85rem;">
-            Replace <code>{tool}</code> with: alice, jwz, tissue, bibval, or vecky
-        </p>
-    </section>
+    <div class="box" data-label="Quick Install">
+        <p class="install-hint">Each tool can be installed with a single command:</p>
+        <div class="install-cmd">curl -fsSL https://evil-mind-evil-sword.github.io/releases/{tool}/install.sh | sh</div>
+        <p class="install-note">Replace <code>{tool}</code> with: alice, jwz, tissue, bibval, or vecky</p>
+    </div>
 
-    <section>
-        <h2>Available Releases</h2>
+    <div class="box" data-label="Available Releases">
         <div id="releases">
             <p class="loading">Loading releases...</p>
         </div>
-    </section>
+    </div>
+
+    <div class="divider">════════════════════</div>
 
     <footer>
         <div class="footer-links">
-            <a href="/">Home</a>
-            <a href="https://github.com/evil-mind-evil-sword">GitHub</a>
+            <a href="/">◄── HOME</a>
+            <a href="https://github.com/evil-mind-evil-sword">[GitHub]</a>
         </div>
     </footer>
 
@@ -237,23 +304,23 @@
         const PACKAGE_INFO = {
             alice: {
                 description: 'Quality gate plugin for Claude Code',
-                artifacts: ['alice-linux-x86_64', 'alice-linux-aarch64', 'alice-macos-x86_64', 'alice-macos-aarch64']
+                artifacts: ['alice-linux-x86_64', 'alice-macos-x86_64', 'alice-macos-aarch64']
             },
             jwz: {
                 description: 'Email for agents',
-                artifacts: ['jwz-linux-x86_64', 'jwz-linux-aarch64', 'jwz-macos-x86_64', 'jwz-macos-aarch64']
+                artifacts: ['jwz-linux-x86_64', 'jwz-macos-x86_64', 'jwz-macos-aarch64']
             },
             tissue: {
                 description: 'Issue tracking for agents',
-                artifacts: ['tissue-linux-x86_64', 'tissue-linux-aarch64', 'tissue-macos-x86_64', 'tissue-macos-aarch64']
+                artifacts: ['tissue-x86_64-linux', 'tissue-aarch64-linux', 'tissue-x86_64-macos', 'tissue-aarch64-macos']
             },
             bibval: {
                 description: 'BibTeX validation',
-                artifacts: ['bibval-linux-x86_64', 'bibval-linux-aarch64', 'bibval-macos-x86_64', 'bibval-macos-aarch64']
+                artifacts: ['bibval-x86_64-linux', 'bibval-aarch64-linux', 'bibval-x86_64-macos', 'bibval-aarch64-macos']
             },
             vecky: {
                 description: 'Self-hosted semantic search',
-                artifacts: ['vecky-linux-x86_64', 'vecky-linux-aarch64', 'vecky-macos-x86_64', 'vecky-macos-aarch64']
+                artifacts: ['vecky-x86_64-linux', 'vecky-aarch64-linux', 'vecky-x86_64-macos', 'vecky-aarch64-macos']
             }
         };
 
@@ -267,9 +334,8 @@
         function copyCmd(btn) {
             const cmd = btn.nextElementSibling.textContent;
             navigator.clipboard.writeText(cmd).then(() => {
-                btn.classList.remove('flash');
-                void btn.offsetWidth; // reflow to restart animation
-                btn.classList.add('flash');
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 1500);
             });
         }
 
@@ -285,7 +351,6 @@
                 let html = '';
 
                 for (const [pkg, data] of Object.entries(manifest)) {
-                    // Support both old format (string) and new format (object with version/sizes)
                     const version = typeof data === 'string' ? data : data.version;
                     const sizes = typeof data === 'object' ? (data.sizes || {}) : {};
                     const info = PACKAGE_INFO[pkg] || { description: '', artifacts: [] };
@@ -297,20 +362,18 @@
                                 <span class="package-name">${pkg}</span>
                                 <span class="package-version">${version}</span>
                             </div>
-                            <p style="color: var(--fg-dim); margin-bottom: 0.75rem; font-size: 0.9rem;">
-                                ${info.description}
-                            </p>
-                            <div class="install-cmd">
-                                <button class="copy-btn" onclick="copyCmd(this)">copy</button>
+                            <p class="package-desc">${info.description}</p>
+                            <div class="package-install">
+                                <button class="copy-btn" onclick="copyCmd(this)">COPY</button>
                                 <code>curl -fsSL https://evil-mind-evil-sword.github.io/releases/${pkg}/install.sh | sh</code>
                             </div>
                             <div class="downloads">
                                 ${info.artifacts.map(a => {
                                     const size = sizes[a];
-                                    const sizeStr = size ? ` <span class="binary-size">${formatSize(size)}</span>` : '';
+                                    const sizeStr = size ? ` <span class="binary-size">(${formatSize(size)})</span>` : '';
                                     return `<a href="${baseUrl}/${a}" class="download-link">${a}${sizeStr}</a>`;
                                 }).join('')}
-                                <a href="${baseUrl}/checksums.txt" class="download-link">checksums</a>
+                                <a href="${baseUrl}/checksums.txt" class="download-link">checksums.txt</a>
                             </div>
                         </div>
                     `;
@@ -319,7 +382,7 @@
                 container.innerHTML = html || '<p class="loading">No releases found</p>';
 
             } catch (err) {
-                container.innerHTML = `<p class="error">Error loading releases: ${err.message}</p>`;
+                container.innerHTML = `<p class="error">ERROR: ${err.message}</p>`;
             }
         }
 
