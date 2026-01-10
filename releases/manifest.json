@@ -26,12 +26,13 @@
     }
   },
   "alice": {
-    "version": "v26.1.31",
+    "version": "v26.1.32",
     "sizes": {
-      "alice-linux-x86_64": 1173920,
-      "alice-macos-aarch64": 1272968,
-      "alice-macos-x86_64": 1170013,
-      "alice-plugin.tar.gz": 29119
+      "alice-linux-aarch64": 1147056,
+      "alice-linux-x86_64": 1172896,
+      "alice-macos-aarch64": 1272328,
+      "alice-macos-x86_64": 1165488,
+      "alice-plugin.tar.gz": 29085
     }
   },
   "vecky": {
