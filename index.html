@@ -133,6 +133,30 @@
             justify-content: center;
         }
 
+        .tooltip {
+            position: fixed;
+            background: var(--fg);
+            color: var(--bg);
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            max-width: 300px;
+            line-height: 1.4;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tool-link {
+            position: relative;
+        }
+
     </style>
 </head>
 <body>
@@ -151,8 +175,11 @@
         <p style="margin-top: 1rem;"><a href="/releases/">View all releases &rarr;</a></p>
     </section>
 
+    <div id="tooltip" class="tooltip"></div>
+
     <script>
         const EXCLUDED = ['marketplace', '.github', 'evil-mind-evil-sword.github.io'];
+        const tooltip = document.getElementById('tooltip');
 
         async function loadTools() {
             const container = document.getElementById('tools-list');
@@ -171,11 +198,46 @@
                 }
 
                 container.innerHTML = tools
-                    .map(r => `<a href="${r.html_url}" style="font-weight: 600;">${r.name}</a>`)
+                    .map(r => `<a href="${r.html_url}" class="tool-link" data-desc="${(r.description || 'No description').replace(/"/g, '&quot;')}" style="font-weight: 600;">${r.name}</a>`)
                     .join(' · ');
+
+                container.querySelectorAll('.tool-link').forEach(link => {
+                    link.addEventListener('mouseenter', showTooltip);
+                    link.addEventListener('mouseleave', hideTooltip);
+                    link.addEventListener('mousemove', moveTooltip);
+                });
             } catch (err) {
                 container.innerHTML = '<span style="color: #c00;">Error loading tools</span>';
             }
+        }
+
+        function showTooltip(e) {
+            const desc = e.target.dataset.desc;
+            if (!desc) return;
+            tooltip.textContent = desc;
+            tooltip.classList.add('visible');
+            positionTooltip(e);
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('visible');
+        }
+
+        function moveTooltip(e) {
+            positionTooltip(e);
+        }
+
+        function positionTooltip(e) {
+            const x = e.clientX + 12;
+            const y = e.clientY + 12;
+            const rect = tooltip.getBoundingClientRect();
+
+            // Keep tooltip in viewport
+            const maxX = window.innerWidth - rect.width - 12;
+            const maxY = window.innerHeight - rect.height - 12;
+
+            tooltip.style.left = Math.min(x, maxX) + 'px';
+            tooltip.style.top = Math.min(y, maxY) + 'px';
         }
 
         loadTools();
