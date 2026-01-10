@@ -2,7 +2,6 @@
   "jwz": {
     "version": "v26.1.20",
     "sizes": {
-      "jwz-linux-aarch64": 1153072,
       "jwz-linux-x86_64": 1177856,
       "jwz-macos-aarch64": 1290784,
       "jwz-macos-x86_64": 1173477
