@@ -1,8 +1,11 @@
 #!/bin/sh
 set -e
 
-# jwz installer
-# Usage: curl -fsSL https://evil-mind-evil-sword.github.io/releases/jwz/install.sh | sh
+# Generic installer template for emes packages
+# Variables are substituted during release:
+#   PACKAGE_NAME, PACKAGE_VERSION, RELEASES_BASE, BINARY_PREFIX, INSTALL_DIR_VAR
+#
+# Usage: Called by deploy-release.sh to generate package-specific install scripts
 
 RELEASES_BASE="https://evil-mind-evil-sword.github.io/releases"
 INSTALL_DIR="${JWZ_INSTALL_DIR:-$HOME/.local/bin}"
@@ -25,13 +28,14 @@ esac
 
 BINARY="jwz-${OS}-${ARCH}"
 
-# Get version from manifest
+# Get version from manifest (with fallback)
 if [ -n "$JWZ_VERSION" ]; then
   VERSION="$JWZ_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"jwz":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | \
+    jq -r '.jwz.version // empty' 2>/dev/null || echo "")
   if [ -z "$VERSION" ]; then
-    VERSION="v26.1.19"
+    VERSION="v26.1.20"
   fi
 fi
 
@@ -40,10 +44,13 @@ URL="${RELEASES_BASE}/jwz/${VERSION}/${BINARY}"
 echo "Installing jwz ${VERSION} for ${OS}/${ARCH}..."
 
 mkdir -p "$INSTALL_DIR"
-curl -fsSL "$URL" -o "$INSTALL_DIR/jwz"
-chmod +x "$INSTALL_DIR/jwz"
-
-echo "jwz installed to $INSTALL_DIR/jwz"
+if curl -fsSL "$URL" -o "$INSTALL_DIR/jwz" 2>/dev/null; then
+  chmod +x "$INSTALL_DIR/jwz"
+  echo "jwz installed to $INSTALL_DIR/jwz"
+else
+  echo "Error: Could not download jwz binary."
+  exit 1
+fi
 
 if ! echo "$PATH" | grep -q "$INSTALL_DIR"; then
   echo ""
@@ -52,6 +59,4 @@ if ! echo "$PATH" | grep -q "$INSTALL_DIR"; then
 fi
 
 echo ""
-echo "Get started:"
-echo "  jwz init"
-echo "  jwz topic new general -d 'General discussion'"
+echo "Run 'jwz --help' to get started"

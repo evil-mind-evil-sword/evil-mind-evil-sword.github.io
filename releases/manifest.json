@@ -1,7 +1,8 @@
 {
   "jwz": {
-    "version": "v26.1.19",
+    "version": "v26.1.20",
     "sizes": {
+      "jwz-linux-aarch64": 1153072,
       "jwz-linux-x86_64": 1177856,
       "jwz-macos-aarch64": 1290784,
       "jwz-macos-x86_64": 1173477
@@ -17,30 +18,31 @@
     }
   },
   "bibval": {
-    "version": "v26.1.12",
+    "version": "v26.1.13",
     "sizes": {
-      "bibval-aarch64-linux": 479808,
-      "bibval-aarch64-macos": 540136,
-      "bibval-x86_64-linux": 530784,
-      "bibval-x86_64-macos": 552069
+      "bibval-linux-aarch64": 479808,
+      "bibval-linux-x86_64": 530784,
+      "bibval-macos-aarch64": 540136,
+      "bibval-macos-x86_64": 552069
     }
   },
   "alice": {
-    "version": "v26.1.32",
+    "version": "v26.1.33",
     "sizes": {
+      "alice-linux-aarch64": 1147056,
       "alice-linux-x86_64": 1172896,
       "alice-macos-aarch64": 1272328,
       "alice-macos-x86_64": 1165488,
-      "alice-plugin.tar.gz": 29079
+      "alice-plugin.tar.gz": 29085
     }
   },
   "vecky": {
-    "version": "v26.1.12",
+    "version": "v26.1.13",
     "sizes": {
-      "vecky-aarch64-linux": 466424,
-      "vecky-aarch64-macos": 536600,
-      "vecky-x86_64-linux": 518216,
-      "vecky-x86_64-macos": 534174
+      "vecky-linux-aarch64": 466424,
+      "vecky-linux-x86_64": 518216,
+      "vecky-macos-aarch64": 536600,
+      "vecky-macos-x86_64": 534174
     }
   }
 }
