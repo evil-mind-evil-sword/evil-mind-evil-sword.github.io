@@ -10,10 +10,10 @@
   "tissue": {
     "version": "v26.1.21",
     "sizes": {
-      "tissue-linux-aarch64": 1159656,
-      "tissue-linux-x86_64": 1182656,
-      "tissue-macos-aarch64": 1289160,
-      "tissue-macos-x86_64": 1173603
+      "tissue-aarch64-linux": 1159656,
+      "tissue-aarch64-macos": 1289160,
+      "tissue-x86_64-linux": 1182656,
+      "tissue-x86_64-macos": 1173603
     }
   },
   "bibval": {
