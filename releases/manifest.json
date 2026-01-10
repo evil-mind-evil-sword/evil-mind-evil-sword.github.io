@@ -33,5 +33,14 @@
       "alice-macos-x86_64": 1165547,
       "alice-plugin.tar.gz": 29236
     }
+  },
+  "vecky": {
+    "version": "v26.1.14",
+    "sizes": {
+      "vecky-aarch64-linux": 547944,
+      "vecky-aarch64-macos": 629816,
+      "vecky-x86_64-linux": 613832,
+      "vecky-x86_64-macos": 640050
+    }
   }
 }
