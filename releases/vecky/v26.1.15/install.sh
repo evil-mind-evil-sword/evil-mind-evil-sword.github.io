@@ -1,11 +1,8 @@
 #!/bin/sh
 set -e
 
-# Generic installer template for emes packages
-# Variables are substituted during release:
-#   PACKAGE_NAME, PACKAGE_VERSION, RELEASES_BASE, BINARY_PREFIX, INSTALL_DIR_VAR
-#
-# Usage: Called by deploy-release.sh to generate package-specific install scripts
+# vecky installer
+# Usage: curl -fsSL https://evil-mind-evil-sword.github.io/releases/vecky/install.sh | sh
 
 RELEASES_BASE="https://evil-mind-evil-sword.github.io/releases"
 INSTALL_DIR="${VECKY_INSTALL_DIR:-$HOME/.local/bin}"
@@ -26,31 +23,32 @@ case "$ARCH" in
   *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
 esac
 
-BINARY="vecky-${OS}-${ARCH}"
+ASSET="vecky-${ARCH}-${OS}"
 
-# Get version from manifest (with fallback)
+# Get version from manifest
 if [ -n "$VECKY_VERSION" ]; then
   VERSION="$VECKY_VERSION"
 else
-  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | \
-    jq -r '.vecky.version // empty' 2>/dev/null || echo "")
+  VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | tr -d '\n\r\t ' | grep -oE '"vecky":\{"version":"[^"]*"' | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
   if [ -z "$VERSION" ]; then
     VERSION="v26.1.15"
   fi
 fi
 
-URL="${RELEASES_BASE}/vecky/${VERSION}/${BINARY}"
+URL="${RELEASES_BASE}/vecky/${VERSION}/${ASSET}"
 
-echo "Installing vecky ${VERSION} for ${OS}/${ARCH}..."
+echo "Downloading vecky ${VERSION} for ${OS}/${ARCH}..."
+TMPDIR=$(mktemp -d)
+trap "rm -rf $TMPDIR" EXIT
 
+curl -fsSL "$URL" -o "$TMPDIR/vecky"
+
+# Install
 mkdir -p "$INSTALL_DIR"
-if curl -fsSL "$URL" -o "$INSTALL_DIR/vecky" 2>/dev/null; then
-  chmod +x "$INSTALL_DIR/vecky"
-  echo "vecky installed to $INSTALL_DIR/vecky"
-else
-  echo "Error: Could not download vecky binary."
-  exit 1
-fi
+mv "$TMPDIR/vecky" "$INSTALL_DIR/vecky"
+chmod +x "$INSTALL_DIR/vecky"
+
+echo "vecky installed to $INSTALL_DIR/vecky"
 
 if ! echo "$PATH" | grep -q "$INSTALL_DIR"; then
   echo ""

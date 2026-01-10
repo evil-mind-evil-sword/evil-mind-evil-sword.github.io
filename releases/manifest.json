@@ -37,10 +37,10 @@
   "vecky": {
     "version": "v26.1.15",
     "sizes": {
-      "vecky-linux-aarch64": 549664,
-      "vecky-linux-x86_64": 615984,
-      "vecky-macos-aarch64": 630120,
-      "vecky-macos-x86_64": 644575
+      "vecky-aarch64-linux": 549664,
+      "vecky-aarch64-macos": 630120,
+      "vecky-x86_64-linux": 615984,
+      "vecky-x86_64-macos": 644575
     }
   }
 }
