@@ -1,19 +1,20 @@
 {
   "jwz": {
-    "version": "v26.1.22",
+    "version": "v26.1.23",
     "sizes": {
-      "jwz-linux-x86_64": 1190000,
-      "jwz-macos-aarch64": 1310080,
-      "jwz-macos-x86_64": 1187084
+      "jwz-linux-aarch64": 1189640,
+      "jwz-linux-x86_64": 1222000,
+      "jwz-macos-aarch64": 1331984,
+      "jwz-macos-x86_64": 1220963
     }
   },
   "tissue": {
-    "version": "v26.1.21",
+    "version": "v26.1.22",
     "sizes": {
-      "tissue-aarch64-linux": 1159656,
-      "tissue-aarch64-macos": 1289160,
-      "tissue-x86_64-linux": 1182656,
-      "tissue-x86_64-macos": 1173603
+      "tissue-linux-aarch64": 1184792,
+      "tissue-linux-x86_64": 1216032,
+      "tissue-macos-aarch64": 1312184,
+      "tissue-macos-x86_64": 1207077
     }
   },
   "bibval": {
