@@ -8,7 +8,7 @@ set -e
 # Usage: Called by deploy-release.sh to generate package-specific install scripts
 
 RELEASES_BASE="https://evil-mind-evil-sword.github.io/releases"
-INSTALL_DIR="${JWZ_INSTALL_DIR:-$HOME/.local/bin}"
+INSTALL_DIR="${VECKY_INSTALL_DIR:-$HOME/.local/bin}"
 
 # Detect OS and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -26,29 +26,29 @@ case "$ARCH" in
   *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
 esac
 
-BINARY="jwz-${OS}-${ARCH}"
+BINARY="vecky-${OS}-${ARCH}"
 
 # Get version from manifest (with fallback)
-if [ -n "$JWZ_VERSION" ]; then
-  VERSION="$JWZ_VERSION"
+if [ -n "$VECKY_VERSION" ]; then
+  VERSION="$VECKY_VERSION"
 else
   VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | \
-    jq -r '.jwz.version // empty' 2>/dev/null || echo "")
+    jq -r '.vecky.version // empty' 2>/dev/null || echo "")
   if [ -z "$VERSION" ]; then
-    VERSION="v26.1.23"
+    VERSION="v26.1.19"
   fi
 fi
 
-URL="${RELEASES_BASE}/jwz/${VERSION}/${BINARY}"
+URL="${RELEASES_BASE}/vecky/${VERSION}/${BINARY}"
 
-echo "Installing jwz ${VERSION} for ${OS}/${ARCH}..."
+echo "Installing vecky ${VERSION} for ${OS}/${ARCH}..."
 
 mkdir -p "$INSTALL_DIR"
-if curl -fsSL "$URL" -o "$INSTALL_DIR/jwz" 2>/dev/null; then
-  chmod +x "$INSTALL_DIR/jwz"
-  echo "jwz installed to $INSTALL_DIR/jwz"
+if curl -fsSL "$URL" -o "$INSTALL_DIR/vecky" 2>/dev/null; then
+  chmod +x "$INSTALL_DIR/vecky"
+  echo "vecky installed to $INSTALL_DIR/vecky"
 else
-  echo "Error: Could not download jwz binary."
+  echo "Error: Could not download vecky binary."
   exit 1
 fi
 
@@ -59,4 +59,4 @@ if ! echo "$PATH" | grep -q "$INSTALL_DIR"; then
 fi
 
 echo ""
-echo "Run 'jwz --help' to get started"
+echo "Run 'vecky --help' to get started"

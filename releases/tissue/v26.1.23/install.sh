@@ -35,7 +35,7 @@ else
   VERSION=$(curl -fsSL "${RELEASES_BASE}/manifest.json" 2>/dev/null | \
     jq -r '.tissue.version // empty' 2>/dev/null || echo "")
   if [ -z "$VERSION" ]; then
-    VERSION="v26.1.22"
+    VERSION="v26.1.23"
   fi
 fi
 
